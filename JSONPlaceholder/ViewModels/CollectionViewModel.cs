@@ -2,31 +2,40 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
-using Xamarin.Forms;
-
+using AsyncAwaitBestPractices.MVVM;
 using JSONPlaceholder.Models;
-using JSONPlaceholder.Views;
+using Xamarin.Forms;
 
 namespace JSONPlaceholder.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel<Item>
+    public class CollectionViewModel <T>: BaseViewModel<T>
     {
-        public ObservableCollection<Item> Items { get; set; }
+        public ObservableCollection<T> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
+        public AsyncCommand<T> AddItemCommand { get; set; }
 
-        public ItemsViewModel()
+        public CollectionViewModel()
         {
             Title = "Browse";
-            Items = new ObservableCollection<Item>();
+            Items = new ObservableCollection<T>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            AddItemCommand = new AsyncCommand<T>(async (item) => await ExecuteAddItemCommand(item));
 
+            /*
             MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
             {
                 var newItem = item as Item;
                 Items.Add(newItem);
                 await DataStore.AddItemAsync(newItem);
             });
+            */
+        }
+        async Task ExecuteAddItemCommand(T item)
+        {
+            //var newItem = item as Item;
+            var newItem = item ;
+            Items.Add(item);
+            await DataStore.AddItemAsync(newItem);
         }
 
         async Task ExecuteLoadItemsCommand()

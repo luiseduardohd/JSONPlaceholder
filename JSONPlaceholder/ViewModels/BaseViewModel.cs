@@ -12,7 +12,6 @@ namespace JSONPlaceholder.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 
         bool isBusy = false;
         public bool IsBusy
@@ -52,5 +51,10 @@ namespace JSONPlaceholder.ViewModels
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+    }
+    public class BaseViewModel<T2> : BaseViewModel, INotifyPropertyChanged
+    {
+        public IDataStore<T2> DataStore => DependencyService.Get<IDataStore<T2>>();
+
     }
 }
