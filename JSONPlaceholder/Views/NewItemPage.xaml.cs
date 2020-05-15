@@ -21,7 +21,7 @@ namespace JSONPlaceholder.Views
 
             Item = new Item
             {
-                Title = "Item name",
+                Text = "Item name",
                 Description = "This is an item description."
             };
 

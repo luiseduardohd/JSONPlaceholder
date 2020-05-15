@@ -7,9 +7,6 @@ using Xamarin.Forms;
 
 using JSONPlaceholder.Models;
 using JSONPlaceholder.Views;
-using System.Collections.Generic;
-using System.Net;
-using Newtonsoft.Json;
 
 namespace JSONPlaceholder.ViewModels
 {
@@ -31,18 +28,15 @@ namespace JSONPlaceholder.ViewModels
                 await DataStore.AddItemAsync(newItem);
             });
         }
+
         async Task ExecuteLoadItemsCommand()
         {
-            if (IsBusy)
-                return;
-
             IsBusy = true;
 
             try
             {
                 Items.Clear();
                 var items = await DataStore.GetItemsAsync(true);
-                //var items = await GetPhotos(true);
                 foreach (var item in items)
                 {
                     Items.Add(item);
@@ -56,26 +50,6 @@ namespace JSONPlaceholder.ViewModels
             {
                 IsBusy = false;
             }
-        }
-        //async Task<List<Photo>> GetItemsAsync(bool forceRefresh)
-        //{
-        //    var topHeadlines = await GetTopHeadlines();
-
-        //    var articles = topHeadlines.Articles;
-        //    return articles;
-        //}
-
-
-        async Task<List<Photo>> GetPhotos()
-        {
-            var url = "https://jsonplaceholder.typicode.com/photos";
-            var uri = new Uri(url);
-            var webClient = new WebClient();
-            var json = await webClient.DownloadStringTaskAsync(uri);
-
-            var result = JsonConvert.DeserializeObject<List<Photo>>(json);
-
-            return result;
         }
     }
 }

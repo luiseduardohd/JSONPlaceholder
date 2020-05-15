@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{13BB5D15-5AE7-4A67-BAD4-D5D64FBEB5E6}</ProjectGuid>
+    <ProjectGuid>{68CB5D35-B40E-415F-9CF4-71B30D6BB89E}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{6968b3a4-1835-46a3-ac5c-1ae33b475983}</TemplateGuid>
     <OutputType>Library</OutputType>
@@ -87,7 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JSONPlaceholder\JSONPlaceholder.csproj">
-      <Project>{DF16D708-FE3D-481B-BA91-E3872132EA5A}</Project>
+      <Project>{D6FCB15E-69FA-4107-ADA6-5FAFC4522BBD}</Project>
       <Name>JSONPlaceholder</Name>
     </ProjectReference>
   </ItemGroup>

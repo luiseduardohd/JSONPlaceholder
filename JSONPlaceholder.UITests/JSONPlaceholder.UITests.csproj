@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{81595F7A-2B4E-4D69-9523-F3DC56C74498}</ProjectGuid>
+    <ProjectGuid>{E95351E7-A346-4F78-9824-0AAA75F1143D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>JSONPlaceholder.UITests</RootNamespace>
     <AssemblyName>JSONPlaceholder.UITests</AssemblyName>
@@ -33,13 +33,13 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JSONPlaceholder.iOS\JSONPlaceholder.iOS.csproj">
-      <Project>{E7D8D931-DD85-4F17-9E8E-06F13EE0721D}</Project>
+      <Project>{84C0CF4C-59FF-4CCE-8777-FE93F507427A}</Project>
       <Name>JSONPlaceholder.iOS</Name>
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\JSONPlaceholder.Android\JSONPlaceholder.Android.csproj">
-      <Project>{13BB5D15-5AE7-4A67-BAD4-D5D64FBEB5E6}</Project>
+      <Project>{68CB5D35-B40E-415F-9CF4-71B30D6BB89E}</Project>
       <Name>JSONPlaceholder.Android</Name>
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
       <Private>False</Private>
