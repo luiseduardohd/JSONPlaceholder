@@ -56,5 +56,11 @@ namespace JSONPlaceholder.WebServices
         [Get("/todos/{todoId}")]
         Task<Todo> GetTodo(int todoId);
 
+        [Get("/users/")]
+        Task<List<User>> GetUsers();
+
+        [Get("/user/{userId}")]
+        Task<Photo> GetUser(int userId);
+
     }
 }

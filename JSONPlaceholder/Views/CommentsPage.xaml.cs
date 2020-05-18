@@ -34,11 +34,6 @@ namespace JSONPlaceholder.Views
             await Navigation.PushAsync(new CommentPage(new CommentViewModel(Comment)));
         }
 
-        //async void AddComment_Clicked(object sender, EventArgs e)
-        //{
-        //    await Navigation.PushModalAsync(new NavigationPage(new NewCommentPage()));
-        //}
-
         protected override void OnAppearing()
         {
             base.OnAppearing();

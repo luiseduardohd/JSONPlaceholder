@@ -12,6 +12,6 @@ namespace JSONPlaceholder.Models
         public String Title { get; set; }
 
         [JsonProperty("completed")]
-        public String Completed { get; set; }
+        public bool Completed { get; set; }
     }
 }

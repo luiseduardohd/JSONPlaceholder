@@ -34,11 +34,6 @@ namespace JSONPlaceholder.Views
             await Navigation.PushAsync(new AlbumPage(new AlbumViewModel(Album)));
         }
 
-        //async void AddAlbum_Clicked(object sender, EventArgs e)
-        //{
-        //    await Navigation.PushModalAsync(new NavigationPage(new NewAlbumPage()));
-        //}
-
         protected override void OnAppearing()
         {
             base.OnAppearing();

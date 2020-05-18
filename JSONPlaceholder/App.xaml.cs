@@ -9,6 +9,7 @@ using Newtonsoft.Json.Converters;
 using Refit;
 using JSONPlaceholder.WebServices;
 using JSONPlaceholder.Util;
+using FFImageLoading;
 
 namespace JSONPlaceholder
 {
@@ -29,6 +30,8 @@ namespace JSONPlaceholder
                     Converters = { new StringEnumConverter() }
                 };
             jsonPlaceholder = RestService.For<IJSONPlaceholder>(Globals.JSONPlaceHolderUrl);
+            //FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            //FFImageLoading.Forms.
         }
 
         protected override void OnStart()

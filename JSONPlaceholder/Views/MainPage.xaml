@@ -21,7 +21,17 @@
                 <views:PhotosPage />
             </x:Arguments>
         </NavigationPage>
-        <!--NavigationPage Title="Comments">
+        <NavigationPage Title="Posts">
+            <NavigationPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="tab_feed.png" />
+                </OnPlatform>
+            </NavigationPage.Icon>
+            <x:Arguments>
+                <views:PostsPage />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Comments">
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
                     <On Platform="iOS" Value="tab_feed.png" />
@@ -30,7 +40,37 @@
             <x:Arguments>
                 <views:CommentsPage />
             </x:Arguments>
-        </-->
+        </NavigationPage>
+        <NavigationPage Title="Albums">
+            <NavigationPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="tab_feed.png" />
+                </OnPlatform>
+            </NavigationPage.Icon>
+            <x:Arguments>
+                <views:AlbumsPage />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Todos">
+            <NavigationPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="tab_feed.png" />
+                </OnPlatform>
+            </NavigationPage.Icon>
+            <x:Arguments>
+                <views:TodosPage />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Users">
+            <NavigationPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="tab_feed.png" />
+                </OnPlatform>
+            </NavigationPage.Icon>
+            <x:Arguments>
+                <views:UsersPage />
+            </x:Arguments>
+        </NavigationPage>
         <NavigationPage Title="About">
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">

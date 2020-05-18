@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="JSONPlaceholder.Views.PhotosPage" Title="{Binding Title}" x:Name="BrowsePhotosPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="JSONPlaceholder.Views.PhotosPage" Title="{Binding Title}" x:Name="BrowsePhotosPage"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             >
     <ContentPage.ToolbarItems>
         <!--ToolbarItem Text="Add" Clicked="AddPhoto_Clicked" /-->
     </ContentPage.ToolbarItems>
@@ -22,13 +24,11 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10">
-                        <Image 
-                               Source="{Binding ThumbnailUrl}" 
-                               Aspect="AspectFill"
-                                MinimumHeightRequest="60"
-                                MinimumWidthRequest="60"
-                               HeightRequest="100" 
-                               WidthRequest="100" />
+		                <ffimageloading:CachedImage HorizontalOptions="Center" VerticalOptions="Center"
+			                WidthRequest="100" HeightRequest="100"
+			                DownsampleToViewSize="true"
+			                Source="{Binding ThumbnailUrl}" >
+		                </ffimageloading:CachedImage>
                         <Label Text="{Binding Title}" d:Text="{Binding .}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
                         <!--Label Text="{Binding Description}" d:Text="Photo descripton" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" /-->
                         <StackLayout.GestureRecognizers>

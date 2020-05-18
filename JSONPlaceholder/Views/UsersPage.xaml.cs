@@ -16,22 +16,22 @@ namespace JSONPlaceholder.Views
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
-    public partial class TodosPage : ContentPage
+    public partial class UsersPage : ContentPage
     {
-        TodosViewModel viewModel;
+        UsersViewModel viewModel;
 
-        public TodosPage()
+        public UsersPage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new TodosViewModel();
+            BindingContext = viewModel = new UsersViewModel();
         }
 
         async void OnItemSelected(object sender, EventArgs args)
         {
             var layout = (BindableObject)sender;
-            var Todo = (Todo)layout.BindingContext;
-            await Navigation.PushAsync(new TodoPage(new TodoViewModel(Todo)));
+            var User = (User)layout.BindingContext;
+            await Navigation.PushAsync(new UserPage(new UserViewModel(User)));
         }
 
         protected override void OnAppearing()
