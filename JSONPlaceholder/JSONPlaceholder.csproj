@@ -15,8 +15,10 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="AsyncAwaitBestPractices.MVVM" Version="4.1.1" />
+    <PackageReference Include="Refit" Version="5.1.67" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Util\" />
+    <Folder Include="WebServices\" />
   </ItemGroup>
 </Project>

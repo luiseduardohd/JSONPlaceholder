@@ -6,7 +6,7 @@ using JSONPlaceholder.Models;
 
 namespace JSONPlaceholder.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class MockDataStore : IDataStore<Item,String>
     {
         readonly List<Item> items;
 

@@ -1,9 +1,11 @@
 ﻿using System;
+using JSONPlaceholder.Models;
+
 namespace JSONPlaceholder.ViewModels
 {
-    public class UserViewModel
+    public class UserViewModel : BaseViewModel<User>
     {
-        public UserViewModel()
+        public UserViewModel(User item)
         {
         }
     }

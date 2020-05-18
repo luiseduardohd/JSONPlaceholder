@@ -1,9 +1,11 @@
 ﻿using System;
+using JSONPlaceholder.Models;
+
 namespace JSONPlaceholder.ViewModels
 {
-    public class CommentViewModel
+    public class CommentViewModel : BaseViewModel<Comment>
     {
-        public CommentViewModel()
+        public CommentViewModel(Models.Comment comment)
         {
         }
     }

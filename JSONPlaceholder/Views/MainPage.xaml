@@ -11,6 +11,26 @@
                 <views:ItemsPage />
             </x:Arguments>
         </NavigationPage>
+        <NavigationPage Title="Photos">
+            <NavigationPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="tab_feed.png" />
+                </OnPlatform>
+            </NavigationPage.Icon>
+            <x:Arguments>
+                <views:PhotosPage />
+            </x:Arguments>
+        </NavigationPage>
+        <!--NavigationPage Title="Comments">
+            <NavigationPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="tab_feed.png" />
+                </OnPlatform>
+            </NavigationPage.Icon>
+            <x:Arguments>
+                <views:CommentsPage />
+            </x:Arguments>
+        </-->
         <NavigationPage Title="About">
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">

@@ -52,9 +52,12 @@ namespace JSONPlaceholder.ViewModels
         }
         #endregion
     }
-    public class BaseViewModel<T2> : BaseViewModel, INotifyPropertyChanged
+    public class BaseViewModel<T2> : BaseViewModel<T2, int>, INotifyPropertyChanged
     {
-        public IDataStore<T2> DataStore => DependencyService.Get<IDataStore<T2>>();
+    }
+    public class BaseViewModel<T2,I> : BaseViewModel, INotifyPropertyChanged
+    {
+        public IDataStore<T2,I> DataStore => DependencyService.Get<IDataStore<T2,I>>();
 
     }
 }

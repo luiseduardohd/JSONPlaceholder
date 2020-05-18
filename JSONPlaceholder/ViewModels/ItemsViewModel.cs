@@ -7,6 +7,7 @@ using Xamarin.Forms;
 
 using JSONPlaceholder.Models;
 using JSONPlaceholder.Views;
+using System.Collections.Generic;
 
 namespace JSONPlaceholder.ViewModels
 {
@@ -19,7 +20,7 @@ namespace JSONPlaceholder.ViewModels
         {
             Title = "Browse";
             Items = new ObservableCollection<Item>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            LoadItemsCommand = new Command( () =>  ExecuteLoadItemsCommand());
 
             MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
             {
@@ -29,14 +30,15 @@ namespace JSONPlaceholder.ViewModels
             });
         }
 
-        async Task ExecuteLoadItemsCommand()
+        void ExecuteLoadItemsCommand()
         {
             IsBusy = true;
 
             try
             {
-                Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
+                Items.Clear();  
+                //var items = await DataStore.GetItemsAsync(true);
+                var items = GetItemsAsync();
                 foreach (var item in items)
                 {
                     Items.Add(item);
@@ -50,6 +52,19 @@ namespace JSONPlaceholder.ViewModels
             {
                 IsBusy = false;
             }
+        }
+        List<Item> GetItemsAsync()
+        {
+            return  new List<Item>()
+            {
+                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." }
+
+            };
         }
     }
 }
