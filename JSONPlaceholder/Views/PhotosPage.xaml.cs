@@ -27,7 +27,7 @@ namespace JSONPlaceholder.Views
             BindingContext = viewModel = new PhotosViewModel();
         }
 
-        async void OnPhotoSelected(object sender, EventArgs args)
+        async void OnItemSelected(object sender, EventArgs args)
         {
             var layout = (BindableObject)sender;
             var Photo = (Photo)layout.BindingContext;

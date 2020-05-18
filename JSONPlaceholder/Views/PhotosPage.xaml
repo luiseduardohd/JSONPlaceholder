@@ -3,9 +3,9 @@
     <ContentPage.ToolbarItems>
         <!--ToolbarItem Text="Add" Clicked="AddPhoto_Clicked" /-->
     </ContentPage.ToolbarItems>
-    <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadPhotosCommand}">
-        <CollectionView x:Name="PhotosCollectionView" ItemsSource="{Binding Photos}">
-            <d:CollectionView.PhotosSource>
+    <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
+        <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Items}">
+            <!--d:CollectionView.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>First Photo</x:String>
                     <x:String>Second Photo</x:String>
@@ -14,14 +14,14 @@
                     <x:String>Fifth Photo</x:String>
                     <x:String>Sixth Photo</x:String>
                 </x:Array>
-            </d:CollectionView.PhotosSource>
+            </-->
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10">
-                        <Label Text="{Binding Text}" d:Text="{Binding .}" LineBreakMode="NoWrap" Style="{DynamicResource ListPhotoTextStyle}" FontSize="16" />
-                        <Label Text="{Binding Description}" d:Text="Photo descripton" LineBreakMode="NoWrap" Style="{DynamicResource ListPhotoDetailTextStyle}" FontSize="13" />
+                        <Label Text="{Binding Title}" d:Text="{Binding .}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
+                        <!--Label Text="{Binding Description}" d:Text="Photo descripton" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" /-->
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnPhotoSelected">
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected">
                             </TapGestureRecognizer>
                         </StackLayout.GestureRecognizers>
                     </StackLayout>

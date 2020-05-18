@@ -38,7 +38,7 @@ namespace JSONPlaceholder.ViewModels
             await DataStore.AddItemAsync(newItem);
         }
 
-        async Task ExecuteLoadItemsCommand()
+        protected virtual async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
 
