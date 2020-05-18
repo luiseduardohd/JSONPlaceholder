@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace JSONPlaceholder.Models
 {
-    public class Album : Entity<String>
+    public class Album : Entity<int>
     {
         [JsonProperty("userId")]
         public String UserId { get; set; }

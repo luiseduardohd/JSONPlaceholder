@@ -4,20 +4,21 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using AsyncAwaitBestPractices.MVVM;
 using JSONPlaceholder.Models;
+using JSONPlaceholder.Util;
 using Xamarin.Forms;
 
 namespace JSONPlaceholder.ViewModels
 {
     public class CollectionViewModel <T>: BaseViewModel<T>
     {
-        public ObservableCollection<T> Items { get; set; }
+        public RangeObservableCollection<T> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
         public AsyncCommand<T> AddItemCommand { get; set; }
 
         public CollectionViewModel()
         {
             Title = "Browse";
-            Items = new ObservableCollection<T>();
+            Items = new RangeObservableCollection<T>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             AddItemCommand = new AsyncCommand<T>(async (item) => await ExecuteAddItemCommand(item));
 

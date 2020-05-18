@@ -15,9 +15,20 @@
                     <x:String>Sixth Photo</x:String>
                 </x:Array>
             </-->
+            <CollectionView.ItemsLayout>
+               <GridItemsLayout Orientation="Vertical"
+                                Span="2" />
+            </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10">
+                        <Image 
+                               Source="{Binding ThumbnailUrl}" 
+                               Aspect="AspectFill"
+                                MinimumHeightRequest="60"
+                                MinimumWidthRequest="60"
+                               HeightRequest="100" 
+                               WidthRequest="100" />
                         <Label Text="{Binding Title}" d:Text="{Binding .}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
                         <!--Label Text="{Binding Description}" d:Text="Photo descripton" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" /-->
                         <StackLayout.GestureRecognizers>

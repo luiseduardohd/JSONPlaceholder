@@ -14,7 +14,7 @@ namespace JSONPlaceholder
 {
     public partial class App : Application
     {
-
+        public IJSONPlaceholder jsonPlaceholder;
         public App()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace JSONPlaceholder
                     ContractResolver = new CamelCasePropertyNamesContractResolver(),
                     Converters = { new StringEnumConverter() }
                 };
-            var jsonPlaceholder = RestService.For<IJSONPlaceholder>(Globals.JSONPlaceHolderUrl);
+            jsonPlaceholder = RestService.For<IJSONPlaceholder>(Globals.JSONPlaceHolderUrl);
         }
 
         protected override void OnStart()
