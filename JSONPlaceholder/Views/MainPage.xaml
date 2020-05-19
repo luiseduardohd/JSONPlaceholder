@@ -11,6 +11,26 @@
                 <views:UsersPage />
             </x:Arguments>
         </NavigationPage>
+        <NavigationPage Title="Albums">
+            <NavigationPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="tab_feed.png" />
+                </OnPlatform>
+            </NavigationPage.Icon>
+            <x:Arguments>
+                <views:AlbumsPage />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Photos">
+            <NavigationPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="tab_feed.png" />
+                </OnPlatform>
+            </NavigationPage.Icon>
+            <x:Arguments>
+                <views:PhotoGroupPage />
+            </x:Arguments>
+        </NavigationPage>
         <NavigationPage Title="Photos">
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
@@ -39,16 +59,6 @@
             </NavigationPage.Icon>
             <x:Arguments>
                 <views:CommentsPage />
-            </x:Arguments>
-        </NavigationPage>
-        <NavigationPage Title="Albums">
-            <NavigationPage.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="iOS" Value="tab_feed.png" />
-                </OnPlatform>
-            </NavigationPage.Icon>
-            <x:Arguments>
-                <views:AlbumsPage />
             </x:Arguments>
         </NavigationPage>
     </TabbedPage.Children>

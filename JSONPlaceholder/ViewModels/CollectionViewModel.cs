@@ -21,8 +21,9 @@ namespace JSONPlaceholder.ViewModels
         {
             Title = "Browse";
             Items = new RangeObservableCollection<T>();
-            _syncLock = new object();
-            BindingBase.EnableCollectionSynchronization(Items, _syncLock, ObservableCollectionCallback);
+            //_syncLock = new object();
+            //BindingBase.EnableCollectionSynchronization(Items, _syncLock, ObservableCollectionCallback);
+            BindingBase.EnableCollectionSynchronization(Items, null, ObservableCollectionCallback);
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             AddItemCommand = new AsyncCommand<T>(async (item) => await ExecuteAddItemCommand(item));
 
@@ -39,7 +40,7 @@ namespace JSONPlaceholder.ViewModels
         }
         void ObservableCollectionCallback(IEnumerable collection, object context, Action accessMethod, bool writeAccess)
         {
-            lock (_syncLock)
+            lock (collection)
             {
                 accessMethod?.Invoke();
             }

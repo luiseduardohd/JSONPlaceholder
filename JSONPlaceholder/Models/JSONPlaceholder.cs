@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using Xamarin.Forms;
+using System.Diagnostics;
+using System.Linq;
+using System.Net.Sockets;
+using System.Threading.Tasks;
 using JSONPlaceholder.Database;
 using JSONPlaceholder.Util;
 using JSONPlaceholder.WebServices;
+using Refit;
 using SQLite;
-using System.Linq;
-using System.Diagnostics;
+using Xamarin.Essentials;
 
 namespace JSONPlaceholder.Models
 {
@@ -257,29 +255,52 @@ namespace JSONPlaceholder.Models
             {
                 var rangeObservableCollection = new RangeObservableCollection<T>();
 
-                var items = await databaseAction();
 
-                if (items.Count() > 0)
+                //var items = await databaseAction();
+
+                //if (items.Count() > 0)
+                //{
+                //    rangeObservableCollection.AddRange(items);
+
+                //    UpdateInBackground(rangeObservableCollection, items, webServiceAction, SQLiteAsyncConnection);
+                //}
+                //else
+                try
                 {
-                    rangeObservableCollection.AddRange(items);
+                    var current = Connectivity.NetworkAccess;
 
-                    UpdateInBackground(rangeObservableCollection, items, webServiceAction, SQLiteAsyncConnection);
+                    if (current == NetworkAccess.Internet)
+                    {
+                        var items = await webServiceAction();
+                        rangeObservableCollection.AddRange(items);
+
+                        UpdateDatabaseInBackground(items, SQLiteAsyncConnection);
+                    }
+                    else
+                    {
+                        var items = await databaseAction();
+                        rangeObservableCollection.AddRange(items);
+                    }
                 }
-                else try
+                catch (ApiException )
                 {
-                    items = await webServiceAction();
+                    var items = await databaseAction();
                     rangeObservableCollection.AddRange(items);
-
-                    UpdateDatabaseInBackground(items, SQLiteAsyncConnection);
+                }
+                catch (SocketException)
+                {
+                    var items = await databaseAction();
+                    rangeObservableCollection.AddRange(items);
                 }
                 catch (Exception Exception)
                 {
-                    Debug.WriteLine("Exception:" + Exception);
+                    Debug.WriteLine("Exception:"+ Exception);
                 }
 
                 return rangeObservableCollection;
 
             }
+
             public static void UpdateInBackground(RangeObservableCollection<T> rangeObservableCollection, IEnumerable<T> items, Func<Task<IEnumerable<T>>> webServiceAction, SQLiteAsyncConnection SQLiteAsyncConnection)
             {
                 _ = Task.Run(async () =>
@@ -305,7 +326,7 @@ namespace JSONPlaceholder.Models
             }
             public static async Task UpdateDatabaseAsync(IEnumerable<T> items,SQLiteAsyncConnection SQLiteAsyncConnection)
             {
-                //await SQLiteAsyncConnection.DeleteAllAsync<User>();
+                await SQLiteAsyncConnection.DeleteAllAsync<User>();
                 await SQLiteAsyncConnection.RunInTransactionAsync(nonAsyncConnection =>
                 {
                     foreach (var item in items)

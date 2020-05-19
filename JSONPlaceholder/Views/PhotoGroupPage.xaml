@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="JSONPlaceholder.Views.PhotoGroupPage" Title="{Binding Title}" x:Name="BrowsePhotoGroupPage"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             >
+    <ContentPage.ToolbarItems>
+        <!--ToolbarItem Text="Add" Clicked="AddPhoto_Clicked" /-->
+    </ContentPage.ToolbarItems>
+    <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
+        <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Items}" IsGrouped="true">
+            <CollectionView.ItemsLayout>
+               <GridItemsLayout Orientation="Vertical"
+                                Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Name}"
+                           BackgroundColor="LightGray"
+                           FontSize="Large"
+                           FontAttributes="Bold" />
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10">
+		                <ffimageloading:CachedImage HorizontalOptions="Center" VerticalOptions="Center"
+			                WidthRequest="100" HeightRequest="100"
+			                DownsampleToViewSize="true"
+			                Source="{Binding ThumbnailUrl}" >
+		                </ffimageloading:CachedImage>
+                        <Label Text="{Binding Title}" d:Text="{Binding .}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
+                        <!--Label Text="{Binding Description}" d:Text="Photo descripton" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" /-->
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.GroupFooterTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Count, StringFormat='Total : {0:D}'}"
+                           Margin="0,0,0,10" />
+                </DataTemplate>
+            </CollectionView.GroupFooterTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>
