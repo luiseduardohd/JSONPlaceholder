@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -14,13 +15,18 @@ namespace JSONPlaceholder.ViewModels
         public RangeObservableCollection<T> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
         public AsyncCommand<T> AddItemCommand { get; set; }
+        private readonly object _syncLock ;
 
         public CollectionViewModel()
         {
             Title = "Browse";
             Items = new RangeObservableCollection<T>();
+            _syncLock = new object();
+            BindingBase.EnableCollectionSynchronization(Items, _syncLock, ObservableCollectionCallback);
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             AddItemCommand = new AsyncCommand<T>(async (item) => await ExecuteAddItemCommand(item));
+
+            //Xamarin.Forms.BindingBase.EnableCollectionSynchronization()
 
             /*
             MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
@@ -30,6 +36,13 @@ namespace JSONPlaceholder.ViewModels
                 await DataStore.AddItemAsync(newItem);
             });
             */
+        }
+        void ObservableCollectionCallback(IEnumerable collection, object context, Action accessMethod, bool writeAccess)
+        {
+            lock (_syncLock)
+            {
+                accessMethod?.Invoke();
+            }
         }
         async Task ExecuteAddItemCommand(T item)
         {

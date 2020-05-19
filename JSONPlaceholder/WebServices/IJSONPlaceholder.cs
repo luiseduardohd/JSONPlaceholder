@@ -8,59 +8,54 @@ namespace JSONPlaceholder.WebServices
 {
     public interface IJSONPlaceholder
     {
-        //[Get("/posts/{user}")]
-        //Task<User> GetPosts(string user);
-
-        //[Get("/posts/{user}")]
-        //Task<User> GetPosts(string user);
 
         [Get("/posts/")]
-        Task<List<Post>> GetPosts();
+        Task<List<Post>> GetPostsAsync();
 
         [Get("/users/{user.Id}/posts/")]
-        Task<Post> GetPost(User user);
+        Task<List<Post>> GetPostsAsync(User user);
 
         [Get("/posts/{postId}")]
-        Task<Post> GetPost(int postId);
+        Task<Post> GetPostAsync(int postId);
 
         [Get("/comments/")]
-        Task<List<Comment>> GetComments();
+        Task<List<Comment>> GetCommentsAsync();
 
         [Get("/posts/{post.Id}/comments/")]
-        Task<List<Comment>> GetComments(Post post);
+        Task<List<Comment>> GetCommentsAsync(Post post);
 
         [Get("/users/{user.Id}/albums/")]
-        Task<List<Album>> GetAlbums(User user);
+        Task<List<Album>> GetAlbumsAsync(User user);
 
         [Get("/albums/")]
-        Task<List<Album>> GetAlbums();
+        Task<List<Album>> GetAlbumsAsync();
 
         [Get("/albums/{albumId}")]
-        Task<Album> GetAlbum(int albumId);
+        Task<Album> GetAlbumAsync(int albumId);
 
         [Get("/albums/{album.Id}/photos/")]
-        Task<List<Photo>> GetPhotos(Album album);
+        Task<List<Photo>> GetPhotosAsync(Album album);
 
         [Get("/photos/")]
-        Task<List<Photo>> GetPhotos();
+        Task<List<Photo>> GetPhotosAsync();
 
         [Get("/photos/{photoId}")]
-        Task<Photo> GetPhoto(int photoId);
+        Task<Photo> GetPhotoAsync(int photoId);
 
         [Get("/todos/")]
-        Task<List<Todo>> GetTodos();
+        Task<List<Todo>> GetTodosAsync();
 
         [Get("/users/{user.Id}/todos/")]
-        Task<List<Todo>> GetTodos(User user);
+        Task<List<Todo>> GetTodosAsync(User user);
 
         [Get("/todos/{todoId}")]
-        Task<Todo> GetTodo(int todoId);
+        Task<Todo> GetTodoAsync(int todoId);
 
         [Get("/users/")]
-        Task<List<User>> GetUsers();
+        Task<List<User>> GetUsersAsync();
 
         [Get("/user/{userId}")]
-        Task<Photo> GetUser(int userId);
+        Task<Photo> GetUserAsync(int userId);
 
     }
 }

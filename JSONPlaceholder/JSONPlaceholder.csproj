@@ -18,9 +18,11 @@
     <PackageReference Include="Refit" Version="5.1.67" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Util\" />
     <Folder Include="WebServices\" />
+    <Folder Include="Database\" />
   </ItemGroup>
 </Project>

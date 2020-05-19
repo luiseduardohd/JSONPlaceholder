@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Foundation;
 using UIKit;
 
@@ -25,7 +25,13 @@ namespace JSONPlaceholder.iOS
             Xamarin.Calabash.Start();
             global::Xamarin.Forms.Forms.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
-            LoadApplication(new App());
+            var formsApp = new App();
+            //await formsApp.InitializeAsync();
+            //_ = Task.Run(async () =>
+            //{
+            //    await formsApp.InitializeAsync();
+            //});
+            LoadApplication(formsApp);
 
             return base.FinishedLaunching(app, options);
         }

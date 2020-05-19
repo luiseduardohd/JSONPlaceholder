@@ -20,7 +20,7 @@ namespace JSONPlaceholder.ViewModels
             try
             {
                 Items.Clear();
-                var items = await ((App)App.Current).jsonPlaceholder.GetUsers();
+                var items = await App.jsonPlaceholder.GetUsersAsync();
                 Items.AddRange(items);
             }
             catch (Exception ex)

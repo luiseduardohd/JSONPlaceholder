@@ -21,7 +21,7 @@ namespace JSONPlaceholder.ViewModels
             try
             {
                 Items.Clear();
-                var items = await ((App)App.Current).jsonPlaceholder.GetPhotos();
+                var items = await App.jsonPlaceholder.GetPhotosAsync();
                 Items.AddRange(items);
             }
             catch (Exception ex)

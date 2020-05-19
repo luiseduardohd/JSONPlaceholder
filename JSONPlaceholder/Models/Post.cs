@@ -3,10 +3,10 @@ using Newtonsoft.Json;
 
 namespace JSONPlaceholder.Models
 {
-    public class Post : Entity<String>
+    public class Post : Entity<int>
     {
         [JsonProperty("userId")]
-        public String UserId { get; set; }
+        public int UserId { get; set; }
 
         [JsonProperty("title")]
         public String Title { get; set; }

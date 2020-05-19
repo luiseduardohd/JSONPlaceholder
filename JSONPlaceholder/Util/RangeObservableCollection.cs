@@ -9,6 +9,8 @@ namespace JSONPlaceholder.Util
 {
     public class RangeObservableCollection<T> : ObservableCollection<T> //where T : INotifyPropertyChanged
     {
+        private int NotifyFirstNElements { get; set; } = 40;
+
         public RangeObservableCollection()
         {
             base.CollectionChanged += CollectionChanged_Handler;
@@ -29,16 +31,26 @@ namespace JSONPlaceholder.Util
             if (list == null)
                 throw new ArgumentNullException("list");
 
-            _suppressNotification = true;
+            int count = 0;
+            
 
             foreach (T item in list)
             {
+                //if (count < notifyFirstNElements)
+                //{
+
+                //}
+                //else
+                if (count >= NotifyFirstNElements)
+                {
+                    _suppressNotification = true;
+                }
                 Add(item);
                 if( item is INotifyPropertyChanged )
                 {
                     ((INotifyPropertyChanged)item).PropertyChanged += ItemChanged;
                 }
-                
+                count++;
             }
             _suppressNotification = false;
 
