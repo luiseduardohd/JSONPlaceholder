@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using JSONPlaceholder.Util;
 
-namespace JSONPlaceholder.Models
+namespace JSONPlaceholder.Entities
 {
     public class PhotoGroup
         //: List<Photo>

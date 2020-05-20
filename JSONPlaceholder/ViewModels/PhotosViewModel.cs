@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using JSONPlaceholder.Models;
+using JSONPlaceholder.Entities;
 using Xamarin.Forms;
 
 namespace JSONPlaceholder.ViewModels

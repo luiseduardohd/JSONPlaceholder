@@ -1,5 +1,5 @@
 ﻿using System;
-using JSONPlaceholder.Models;
+using JSONPlaceholder.Entities;
 
 namespace JSONPlaceholder.ViewModels
 {

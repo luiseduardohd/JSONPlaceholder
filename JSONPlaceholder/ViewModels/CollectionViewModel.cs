@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using AsyncAwaitBestPractices.MVVM;
-using JSONPlaceholder.Models;
+using JSONPlaceholder.Entities;
 using JSONPlaceholder.Util;
 using Xamarin.Forms;
 

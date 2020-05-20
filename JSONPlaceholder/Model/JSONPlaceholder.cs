@@ -12,7 +12,7 @@ using Refit;
 using SQLite;
 using Xamarin.Essentials;
 
-namespace JSONPlaceholder.Models
+namespace JSONPlaceholder.Entities
 {
     public class JSONPlaceholder
     {

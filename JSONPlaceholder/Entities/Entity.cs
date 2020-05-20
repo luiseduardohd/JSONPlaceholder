@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using SQLite;
 
-namespace JSONPlaceholder.Models
+namespace JSONPlaceholder.Entities
 {
     //public class SqliteEntity<T> //: Entity, IEntity
     public class Entity<T> //: IEntity

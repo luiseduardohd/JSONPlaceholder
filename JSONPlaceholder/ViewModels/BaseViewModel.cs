@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 using Xamarin.Forms;
 
-using JSONPlaceholder.Models;
+using JSONPlaceholder.Entities;
 using JSONPlaceholder.Services;
 
 namespace JSONPlaceholder.ViewModels

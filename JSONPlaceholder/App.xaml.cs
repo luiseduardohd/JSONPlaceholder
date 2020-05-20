@@ -9,7 +9,7 @@ using Newtonsoft.Json.Converters;
 using Refit;
 using JSONPlaceholder.WebServices;
 using JSONPlaceholder.Util;
-using JSONPlaceholder.Models;
+using JSONPlaceholder.Entities;
 using FFImageLoading;
 using JSONPlaceholder.Database;
 using System.IO;
@@ -20,9 +20,9 @@ namespace JSONPlaceholder
     public partial class App : Application
     {
 
-        static JSONPlaceholder.Models.JSONPlaceholder _jsonPlaceholder;
+        static JSONPlaceholder.Entities.JSONPlaceholder _jsonPlaceholder;
 
-        public static JSONPlaceholder.Models.JSONPlaceholder jsonPlaceholder
+        public static JSONPlaceholder.Entities.JSONPlaceholder jsonPlaceholder
         {
             get
             {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using JSONPlaceholder.Models;
+using JSONPlaceholder.Entities;
 
 
 namespace JSONPlaceholder.Services
