@@ -31,6 +31,8 @@
     <Folder Include="Views\Post\" />
     <Folder Include="Views\Todo\" />
     <Folder Include="Views\User\" />
+    <Folder Include="Entities\" />
+    <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\Album\AlbumPage.xaml.cs" />
