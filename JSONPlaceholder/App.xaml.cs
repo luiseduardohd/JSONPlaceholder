@@ -32,7 +32,7 @@ namespace JSONPlaceholder
                     var JSONPlaceholderSqlite = new JSONPlaceholderSqlite(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), dbFileName));
                     var IJSONPlaceholder = RestService.For<IJSONPlaceholder>(Globals.JSONPlaceHolderUrl);
 
-                    _jsonPlaceholder = new Models.JSONPlaceholder(JSONPlaceholderSqlite, IJSONPlaceholder);
+                    _jsonPlaceholder = new Entities.JSONPlaceholder(JSONPlaceholderSqlite, IJSONPlaceholder);
                 }
                 return _jsonPlaceholder;
             }
@@ -42,8 +42,6 @@ namespace JSONPlaceholder
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
-            DependencyService.Register<MockDataStore>();
             MainPage = new MainPage();
             JsonConvert.DefaultSettings =
                 () => new JsonSerializerSettings()

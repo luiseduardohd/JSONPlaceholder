@@ -35,13 +35,6 @@
     <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Views\Album\AlbumPage.xaml.cs" />
-    <Compile Remove="Views\Comment\CommentsPage.xaml.cs" />
-    <Compile Remove="Views\Photo\PhotoGroupPage.xaml.cs" />
-    <Compile Remove="Views\Photo\PhotoPage.xaml.cs" />
-    <Compile Remove="Views\Photo\PhotosPage.xaml.cs" />
-    <Compile Remove="Views\Post\PostPage.xaml.cs" />
-    <Compile Remove="Views\User\UsersPage.xaml.cs" />
     <Compile Remove="Views\MainPage.xaml.cs" />
     <Compile Remove="Views\MainPage.xaml.cs" />
   </ItemGroup>
@@ -51,21 +44,6 @@
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Comment\CommentPage.xaml.cs">
       <DependentUpon>CommentPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Comment\CommentsPage.xaml.cs">
-      <DependentUpon>CommentsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Photo\PhotoGroupPage.xaml.cs">
-      <DependentUpon>PhotoGroupPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Photo\PhotoPage.xaml.cs">
-      <DependentUpon>PhotoPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Photo\PhotosPage.xaml.cs">
-      <DependentUpon>PhotosPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Post\PostPage.xaml.cs">
-      <DependentUpon>PostPage.xaml</DependentUpon>
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Post\PostsPage.xaml.cs">
       <DependentUpon>PostsPage.xaml</DependentUpon>
@@ -78,9 +56,6 @@
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\User\UserPage.xaml.cs">
       <DependentUpon>UserPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\User\UsersPage.xaml.cs">
-      <DependentUpon>UsersPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

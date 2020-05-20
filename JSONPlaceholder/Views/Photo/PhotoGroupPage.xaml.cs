@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using JSONPlaceholder.Models;
+using JSONPlaceholder.Entities;
 using JSONPlaceholder.ViewModels;
 using Xamarin.Forms;
 

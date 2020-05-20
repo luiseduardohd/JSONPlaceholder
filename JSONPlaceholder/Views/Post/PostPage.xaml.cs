@@ -3,7 +3,7 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using JSONPlaceholder.Models;
+using JSONPlaceholder.Entities;
 using JSONPlaceholder.ViewModels;
 
 namespace JSONPlaceholder.Views

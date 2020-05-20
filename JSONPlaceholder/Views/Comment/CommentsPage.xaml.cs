@@ -6,8 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
-using JSONPlaceholder.Models;
+using JSONPlaceholder.Entities;
 using JSONPlaceholder.Views;
 using JSONPlaceholder.ViewModels;
 

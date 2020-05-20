@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using JSONPlaceholder.Models;
+using JSONPlaceholder.Entities;
 using JSONPlaceholder.Views;
 using JSONPlaceholder.ViewModels;
 
@@ -31,11 +31,6 @@ namespace JSONPlaceholder.Views
             var Photo = (Photo)layout.BindingContext;
             await Navigation.PushAsync(new PhotoPage(new PhotoViewModel(Photo)));
         }
-
-        //async void AddPhoto_Clicked(object sender, EventArgs e)
-        //{
-        //    await Navigation.PushModalAsync(new NavigationPage(new NewPhotoPage()));
-        //}
 
         protected override void OnAppearing()
         {
