@@ -25,5 +25,20 @@
     <Folder Include="Util\" />
     <Folder Include="WebServices\" />
     <Folder Include="Database\" />
+    <Folder Include="Views\Album\" />
+    <Folder Include="Views\Comment\" />
+    <Folder Include="Views\Photo\" />
+    <Folder Include="Views\Post\" />
+    <Folder Include="Views\Todo\" />
+    <Folder Include="Views\User\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\Album\AlbumPage.xaml.cs" />
+    <Compile Remove="Views\Comment\CommentsPage.xaml.cs" />
+    <Compile Remove="Views\Photo\PhotoGroupPage.xaml.cs" />
+    <Compile Remove="Views\Photo\PhotoPage.xaml.cs" />
+    <Compile Remove="Views\Photo\PhotosPage.xaml.cs" />
+    <Compile Remove="Views\Post\PostPage.xaml.cs" />
+    <Compile Remove="Views\User\UsersPage.xaml.cs" />
   </ItemGroup>
 </Project>
