@@ -4,8 +4,7 @@ using SQLite;
 
 namespace JSONPlaceholder.Entities
 {
-    //public class SqliteEntity<T> //: Entity, IEntity
-    public class Entity<T> //: IEntity
+    public class Entity<T>
     {
         [PrimaryKey]
         [JsonProperty("id")]

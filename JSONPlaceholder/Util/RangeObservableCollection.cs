@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace JSONPlaceholder.Util
 {
-    public class RangeObservableCollection<T> : ObservableCollection<T> //where T : INotifyPropertyChanged
+    public class RangeObservableCollection<T> : ObservableCollection<T> 
     {
-        private int NotifyFirstNElements { get; set; } = 40;
+        private int NotifyFirstNElements { get; set; } = 8;
 
         public RangeObservableCollection()
         {
@@ -36,11 +36,6 @@ namespace JSONPlaceholder.Util
 
             foreach (T item in list)
             {
-                //if (count < notifyFirstNElements)
-                //{
-
-                //}
-                //else
                 if (count >= NotifyFirstNElements)
                 {
                     _suppressNotification = true;
@@ -81,7 +76,6 @@ namespace JSONPlaceholder.Util
 
         void CollectionChanged_Handler(object sender, NotifyCollectionChangedEventArgs e)
         {
-            //unsubscribe all old objects
             if (e.OldItems != null)
             {
                 foreach (T x in e.OldItems)
@@ -93,7 +87,6 @@ namespace JSONPlaceholder.Util
                 }
             }
 
-            //subscribe all new objects
             if (e.NewItems != null)
             {
                 foreach (T x in e.NewItems)

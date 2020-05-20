@@ -6,11 +6,9 @@ using JSONPlaceholder.Util;
 namespace JSONPlaceholder.Entities
 {
     public class PhotoGroup
-        //: List<Photo>
         : RangeObservableCollection<Photo>
     {
         public string Name { get; private set; }
-        //public int AlbumId { get; private set; }
 
         public Album Album { get; private set; }
 

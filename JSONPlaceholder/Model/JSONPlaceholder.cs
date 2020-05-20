@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 using JSONPlaceholder.Database;
 using JSONPlaceholder.Util;
 using JSONPlaceholder.WebServices;
+using JSONPlaceholder.Entities;
 using Refit;
 using SQLite;
 using Xamarin.Essentials;
 
-namespace JSONPlaceholder.Entities
+namespace JSONPlaceholder.Model
 {
     public class JSONPlaceholder
     {

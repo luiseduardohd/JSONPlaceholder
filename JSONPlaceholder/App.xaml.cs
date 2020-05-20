@@ -20,9 +20,9 @@ namespace JSONPlaceholder
     public partial class App : Application
     {
 
-        static JSONPlaceholder.Entities.JSONPlaceholder _jsonPlaceholder;
+        static JSONPlaceholder.Model.JSONPlaceholder _jsonPlaceholder;
 
-        public static JSONPlaceholder.Entities.JSONPlaceholder jsonPlaceholder
+        public static JSONPlaceholder.Model.JSONPlaceholder jsonPlaceholder
         {
             get
             {
@@ -32,7 +32,7 @@ namespace JSONPlaceholder
                     var JSONPlaceholderSqlite = new JSONPlaceholderSqlite(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), dbFileName));
                     var IJSONPlaceholder = RestService.For<IJSONPlaceholder>(Globals.JSONPlaceHolderUrl);
 
-                    _jsonPlaceholder = new Entities.JSONPlaceholder(JSONPlaceholderSqlite, IJSONPlaceholder);
+                    _jsonPlaceholder = new Model.JSONPlaceholder(JSONPlaceholderSqlite, IJSONPlaceholder);
                 }
                 return _jsonPlaceholder;
             }
