@@ -19,8 +19,6 @@ namespace JSONPlaceholder
 {
     public partial class App : Application
     {
-        //public IJSONPlaceholder jsonPlaceholder;
-        //public JSONPlaceholder.Models.JSONPlaceholder jsonPlaceholder;
 
         static JSONPlaceholder.Models.JSONPlaceholder _jsonPlaceholder;
 
@@ -30,9 +28,8 @@ namespace JSONPlaceholder
             {
                 if (_jsonPlaceholder == null)
                 {
-
-                    var JSONPlaceholderSqlite = new JSONPlaceholderSqlite(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JSONPlaceholder.db3"));
-                    //await JSONPlaceholderSqlite.InitializeAsync();
+                    var dbFileName = Globals.DBCompleteFileExtension;
+                    var JSONPlaceholderSqlite = new JSONPlaceholderSqlite(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), dbFileName));
                     var IJSONPlaceholder = RestService.For<IJSONPlaceholder>(Globals.JSONPlaceHolderUrl);
 
                     _jsonPlaceholder = new Models.JSONPlaceholder(JSONPlaceholderSqlite, IJSONPlaceholder);
@@ -55,22 +52,8 @@ namespace JSONPlaceholder
                     Converters = { new StringEnumConverter() }
                 };
 
-            //var JSONPlaceholderSqlite = new JSONPlaceholderSqlite(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JSONPlaceholder.db3"));
-            //JSONPlaceholderSqlite.Initialize();
-            ////await JSONPlaceholderSqlite.InitializeAsync();
-            //var IJSONPlaceholder = RestService.For<IJSONPlaceholder>(Globals.JSONPlaceHolderUrl);
-
-            //_jsonPlaceholder = new Models.JSONPlaceholder(JSONPlaceholderSqlite, IJSONPlaceholder);
         }
 
-        public async Task InitializeAsync ()
-        {
-            var JSONPlaceholderSqlite = new JSONPlaceholderSqlite(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JSONPlaceholder.db3"));
-            await JSONPlaceholderSqlite.InitializeAsync();
-            var IJSONPlaceholder = RestService.For<IJSONPlaceholder>(Globals.JSONPlaceHolderUrl);
-
-            _jsonPlaceholder = new Models.JSONPlaceholder(JSONPlaceholderSqlite, IJSONPlaceholder);
-        }
 
         protected override void OnStart()
         {

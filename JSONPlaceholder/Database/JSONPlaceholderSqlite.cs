@@ -6,7 +6,7 @@ using SQLite;
 
 namespace JSONPlaceholder.Database
 {
-    public class JSONPlaceholderSqlite //: IJSONPlaceholder, IInitialize, IInitializeAsync
+    public class JSONPlaceholderSqlite 
     {
         public readonly SQLiteAsyncConnection SQLiteAsyncConnection;
 
