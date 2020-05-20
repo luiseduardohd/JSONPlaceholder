@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace JSONPlaceholder.Models
+namespace JSONPlaceholder.Entities
 {
     public class Address : Entity<String>
     {
