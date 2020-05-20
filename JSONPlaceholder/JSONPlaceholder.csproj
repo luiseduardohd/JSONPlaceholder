@@ -35,10 +35,9 @@
     <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Views\MainPage.xaml.cs" />
-    <Compile Remove="Views\MainPage.xaml.cs" />
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Album\AlbumPage.xaml.cs">
       <DependentUpon>AlbumPage.xaml</DependentUpon>
     </Compile>
