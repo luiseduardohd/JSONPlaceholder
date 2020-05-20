@@ -7,10 +7,10 @@
     </ContentPage.ToolbarItems>
     <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
         <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Items}" IsGrouped="true">
-            <CollectionView.ItemsLayout>
+            <!--CollectionView.ItemsLayout>
                <GridItemsLayout Orientation="Vertical"
                                 Span="2" />
-            </CollectionView.ItemsLayout>
+            </-->
             <CollectionView.GroupHeaderTemplate>
                 <DataTemplate>
                     <Label Text="{Binding Name}"

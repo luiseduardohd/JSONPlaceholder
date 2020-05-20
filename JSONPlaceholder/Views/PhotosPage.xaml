@@ -17,10 +17,10 @@
                     <x:String>Sixth Photo</x:String>
                 </x:Array>
             </-->
-            <CollectionView.ItemsLayout>
+            <!--CollectionView.ItemsLayout>
                <GridItemsLayout Orientation="Vertical"
                                 Span="2" />
-            </CollectionView.ItemsLayout>
+            </-->
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10">

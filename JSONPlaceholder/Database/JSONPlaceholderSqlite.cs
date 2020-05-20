@@ -9,13 +9,12 @@ namespace JSONPlaceholder.Database
     public class JSONPlaceholderSqlite //: IJSONPlaceholder, IInitialize, IInitializeAsync
     {
         public readonly SQLiteAsyncConnection SQLiteAsyncConnection;
-        //public readonly SQLiteConnection SQLiteConnection;
+
         private bool isInitialized = false;
 
         public JSONPlaceholderSqlite(string dbPath)
         {
             SQLiteAsyncConnection = new SQLiteAsyncConnection(dbPath);
-            //SQLiteConnection = new SQLiteConnection(dbPath);
         }
 
         public void Initialize()

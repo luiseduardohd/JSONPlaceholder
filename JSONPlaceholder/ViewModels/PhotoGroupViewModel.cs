@@ -30,16 +30,24 @@ namespace JSONPlaceholder.ViewModels
 
                 var albums = await App.jsonPlaceholder.GetAlbumsAsync();
 
-                var photoGroups = new List<PhotoGroup>();
+                //var photoGroups = new List<PhotoGroup>();
                 foreach(var album in albums)
                 {
                     var photoGroup = new PhotoGroup(album.Title, album);
-
-                    photoGroups.Add(photoGroup);
+                    var photos = await App.jsonPlaceholder.GetPhotosAsync(photoGroup.Album);
+                    photoGroup.AddRange(photos);
+                    Items.Add(photoGroup);
                 }
-                Items.AddRange(photoGroups);
+                //Items.AddRange(photoGroups);
 
-                DownloadPhotosInBackground(Items);
+                //foreach (var photoGroup in Items)
+                //{
+                //    var photos = await App.jsonPlaceholder.GetPhotosAsync(photoGroup.Album);
+                //    photoGroup.AddRange(photos);
+                //    //await Task.Delay(TimeSpan.FromMilliseconds(500));
+                //}
+
+                //DownloadPhotosInBackground(Items);
             }
             catch (Exception ex)
             {
