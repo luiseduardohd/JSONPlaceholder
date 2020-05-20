@@ -8,8 +8,6 @@ using JSONPlaceholder.ViewModels;
 
 namespace JSONPlaceholder.Views
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
     public partial class CommentPage : ContentPage
     {
@@ -20,22 +18,6 @@ namespace JSONPlaceholder.Views
             InitializeComponent();
 
             BindingContext = this.viewModel = viewModel;
-        }
-
-        public CommentPage()
-        {
-            InitializeComponent();
-
-            var Comment = new Comment
-            {
-                //Text = "Comment 1",
-                Name = "Comment 1",
-                //Description = "This is an Comment description."
-                Body = "This is an Comment description."
-            };
-
-            viewModel = new CommentViewModel(Comment);
-            BindingContext = viewModel;
         }
     }
 }

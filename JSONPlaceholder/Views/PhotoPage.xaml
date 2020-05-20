@@ -1,9 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="JSONPlaceholder.Views.PhotoPage" Title="{Binding Title}">
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding Photo.Text}" d:Text="Photo name" FontSize="Small" />
-        <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding Photo.Description}" d:Text="Photo description" FontSize="Small" />
-    </StackLayout>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="JSONPlaceholder.Views.PhotoPage" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" Title="{Binding Title}" >
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="{Binding Item.Title}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
+		    <ffimageloading:CachedImage HorizontalOptions="Center" VerticalOptions="Center"
+			    WidthRequest="200" HeightRequest="200"
+			    DownsampleToViewSize="true"
+			    Source="{Binding Item.Url}" >
+            </ffimageloading:CachedImage>        
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

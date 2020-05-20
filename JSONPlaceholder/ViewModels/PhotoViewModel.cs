@@ -5,7 +5,7 @@ namespace JSONPlaceholder.ViewModels
 {
     public class PhotoViewModel : BaseViewModel<Photo>
     {
-        public PhotoViewModel(Models.Photo photo)
+        public PhotoViewModel(Photo item) : base(item)
         {
         }
     }

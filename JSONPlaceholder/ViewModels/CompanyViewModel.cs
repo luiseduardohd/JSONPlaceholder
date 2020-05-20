@@ -5,7 +5,7 @@ namespace JSONPlaceholder.ViewModels
 {
     public class CompanyViewModel : BaseViewModel<Company>
     {
-        public CompanyViewModel()
+        public CompanyViewModel(Company item) : base(item)
         {
         }
     }

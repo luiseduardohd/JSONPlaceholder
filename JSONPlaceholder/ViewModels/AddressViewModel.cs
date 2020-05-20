@@ -5,7 +5,7 @@ namespace JSONPlaceholder.ViewModels
 {
     public class AddressViewModel : BaseViewModel<Address>
     {
-        public AddressViewModel()
+        public AddressViewModel(Address item) : base(item)
         {
         }
     }

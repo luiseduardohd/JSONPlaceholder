@@ -52,11 +52,33 @@ namespace JSONPlaceholder.ViewModels
         }
         #endregion
     }
-    public class BaseViewModel<T2> : BaseViewModel<T2, int>, INotifyPropertyChanged
+    public class BaseViewModel<T2> : BaseViewModel
     {
+        T2 item;
+        public T2 Item
+        {
+            get { return item; }
+            set { SetProperty(ref item, value); }
+        }
+
+        public BaseViewModel(T2 item)
+        {
+            this.Item = item;
+        }
+        public BaseViewModel()
+        {
+        }
+
     }
-    public class BaseViewModel<T2,I> : BaseViewModel, INotifyPropertyChanged
+    public class BaseViewModel<T2,I> : BaseViewModel
     {
+        public BaseViewModel(T2 item) 
+        {
+        }
+        public BaseViewModel() : base()
+        {
+        }
+
         public IDataStore<T2,I> DataStore => DependencyService.Get<IDataStore<T2,I>>();
 
     }

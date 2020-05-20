@@ -10,33 +10,20 @@ using Xamarin.Forms;
 
 namespace JSONPlaceholder.ViewModels
 {
-    public class CollectionViewModel <T>: BaseViewModel<T>
+    public class CollectionViewModel <T>: BaseViewModel<T,int>
     {
         public RangeObservableCollection<T> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
         public AsyncCommand<T> AddItemCommand { get; set; }
-        private readonly object _syncLock ;
 
         public CollectionViewModel()
         {
             Title = "Browse";
             Items = new RangeObservableCollection<T>();
-            //_syncLock = new object();
-            //BindingBase.EnableCollectionSynchronization(Items, _syncLock, ObservableCollectionCallback);
             BindingBase.EnableCollectionSynchronization(Items, null, ObservableCollectionCallback);
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             AddItemCommand = new AsyncCommand<T>(async (item) => await ExecuteAddItemCommand(item));
 
-            //Xamarin.Forms.BindingBase.EnableCollectionSynchronization()
-
-            /*
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
-            {
-                var newItem = item as Item;
-                Items.Add(newItem);
-                await DataStore.AddItemAsync(newItem);
-            });
-            */
         }
         void ObservableCollectionCallback(IEnumerable collection, object context, Action accessMethod, bool writeAccess)
         {
@@ -47,7 +34,6 @@ namespace JSONPlaceholder.ViewModels
         }
         async Task ExecuteAddItemCommand(T item)
         {
-            //var newItem = item as Item;
             var newItem = item ;
             Items.Add(item);
             await DataStore.AddItemAsync(newItem);

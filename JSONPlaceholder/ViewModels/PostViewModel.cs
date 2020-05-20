@@ -5,7 +5,7 @@ namespace JSONPlaceholder.ViewModels
 {
     public class PostViewModel : BaseViewModel<Post>
     {
-        public PostViewModel(Post post)
+        public PostViewModel(Post item) : base(item)
         {
         }
     }

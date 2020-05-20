@@ -5,7 +5,7 @@ namespace JSONPlaceholder.ViewModels
 {
     public class CommentViewModel : BaseViewModel<Comment>
     {
-        public CommentViewModel(Models.Comment comment)
+        public CommentViewModel(Comment item) : base(item)
         {
         }
     }

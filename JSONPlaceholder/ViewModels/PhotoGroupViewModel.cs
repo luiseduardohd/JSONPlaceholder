@@ -13,7 +13,6 @@ namespace JSONPlaceholder.ViewModels
     {
         public PhotoGroupViewModel(PhotoGroup photoGroup) : this()
         {
-            //LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
         public PhotoGroupViewModel() : base()
         {
@@ -29,25 +28,15 @@ namespace JSONPlaceholder.ViewModels
                 Items.Clear();
 
                 var albums = await App.jsonPlaceholder.GetAlbumsAsync();
-
-                //var photoGroups = new List<PhotoGroup>();
-                foreach(var album in albums)
+                await Task.Delay(500);
+                foreach (var album in albums)
                 {
                     var photoGroup = new PhotoGroup(album.Title, album);
                     var photos = await App.jsonPlaceholder.GetPhotosAsync(photoGroup.Album);
                     photoGroup.AddRange(photos);
                     Items.Add(photoGroup);
+                    await Task.Delay(1000);
                 }
-                //Items.AddRange(photoGroups);
-
-                //foreach (var photoGroup in Items)
-                //{
-                //    var photos = await App.jsonPlaceholder.GetPhotosAsync(photoGroup.Album);
-                //    photoGroup.AddRange(photos);
-                //    //await Task.Delay(TimeSpan.FromMilliseconds(500));
-                //}
-
-                //DownloadPhotosInBackground(Items);
             }
             catch (Exception ex)
             {
@@ -59,23 +48,5 @@ namespace JSONPlaceholder.ViewModels
             }
         }
 
-
-        public void DownloadPhotosInBackground(RangeObservableCollection<PhotoGroup> photoGroups)
-        {
-            _ = Task.Run(async () =>
-            {
-                await Task.Delay(TimeSpan.FromSeconds(1));
-                await DownloadPhotosAsync(photoGroups);
-            });
-        }
-        public static async Task DownloadPhotosAsync(RangeObservableCollection<PhotoGroup> photoGroups)
-        {
-            foreach (var photoGroup in photoGroups)
-            {
-                var photos = await App.jsonPlaceholder.GetPhotosAsync(photoGroup.Album);
-                photoGroup.AddRange(photos);
-                await Task.Delay(TimeSpan.FromMilliseconds(500));
-            }
-        }
     }
 }

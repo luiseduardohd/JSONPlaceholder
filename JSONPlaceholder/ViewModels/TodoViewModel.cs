@@ -5,7 +5,7 @@ namespace JSONPlaceholder.ViewModels
 {
     public class TodoViewModel : BaseViewModel<Todo>
     {
-        public TodoViewModel(Models.Todo todo)
+        public TodoViewModel(Todo item) : base(item)
         {
         }
     }

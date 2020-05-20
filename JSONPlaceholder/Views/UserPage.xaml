@@ -1,9 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="JSONPlaceholder.Views.UserPage" Title="{Binding Title}">
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding User.Text}" d:Text="User name" FontSize="Small" />
-        <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding User.Description}" d:Text="User description" FontSize="Small" />
-    </StackLayout>
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="Name:" FontSize="Medium" />
+            <Label Text="{Binding Item.Name}"  FontSize="Small" />
+            <Label Text="Username:" FontSize="Medium" />
+            <Label Text="{Binding Item.Username}"  FontSize="Small" />
+            <Label Text="Email:" FontSize="Medium" />
+            <Label Text="{Binding Item.Email}"  FontSize="Small" />
+            <Label Text="Address Street:" FontSize="Medium" />
+            <Label Text="{Binding Item.Address.Street}"  FontSize="Small" />
+            <Label Text="Address Suite:" FontSize="Medium" />
+            <Label Text="{Binding Item.Address.Suite}"  FontSize="Small" />
+            <Label Text="Address City:" FontSize="Medium" />
+            <Label Text="{Binding Item.Address.City}"  FontSize="Small" />
+            <Label Text="Address Zipcode:" FontSize="Medium" />
+            <Label Text="{Binding Item.Address.Zipcode}"  FontSize="Small" />
+            <Label Text="Address Geolocation Latitude:" FontSize="Medium" />
+            <Label Text="{Binding Item.Address.Geolocation.Latitude}"  FontSize="Small" />
+            <Label Text="Address Geolocation Longitude:" FontSize="Medium" />
+            <Label Text="{Binding Item.Address.Geolocation.Longitude}"  FontSize="Small" />
+            <Label Text="Phone:" FontSize="Medium" />
+            <Label Text="{Binding Item.Phone}"  FontSize="Small" />
+            <Label Text="Website:" FontSize="Medium" />
+            <Label Text="{Binding Item.Website}"  FontSize="Small" />
+            <Label Text="Company Name:" FontSize="Medium" />
+            <Label Text="{Binding Item.Company.Name}"  FontSize="Small" />
+            <Label Text="Company CatchPhrase:" FontSize="Medium" />
+            <Label Text="{Binding Item.Company.CatchPhrase}"  FontSize="Small" />
+            <Label Text="Company bs:" FontSize="Medium" />
+            <Label Text="{Binding Item.Company.bs}"  FontSize="Small" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

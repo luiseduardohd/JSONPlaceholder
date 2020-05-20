@@ -5,7 +5,7 @@ namespace JSONPlaceholder.ViewModels
 {
     public class AlbumViewModel : BaseViewModel<Album>
     {
-        public AlbumViewModel(Models.Album album)
+        public AlbumViewModel(Album item) : base(item)
         {
         }
     }
