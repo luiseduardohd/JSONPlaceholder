@@ -185,13 +185,15 @@ namespace JSONPlaceholder.Model
                         rangeObservableCollection.AddRange(items);
                     }
                 }
-                catch (ApiException )
+                catch (ApiException Exception)
                 {
+                    Debug.WriteLine("Exception:" + Exception);
                     var items = await databaseAction();
                     rangeObservableCollection.AddRange(items);
                 }
-                catch (SocketException)
+                catch (SocketException Exception)
                 {
+                    Debug.WriteLine("Exception:" + Exception);
                     var items = await databaseAction();
                     rangeObservableCollection.AddRange(items);
                 }
@@ -223,18 +225,29 @@ namespace JSONPlaceholder.Model
             {
                 _ = Task.Run(async () =>
                 {
-                    await Task.Delay(TimeSpan.FromMilliseconds(1));
-                    await UpdateDatabaseAsync(items, SQLiteAsyncConnection);
+                    try
+                    {
+                        await Task.Delay(TimeSpan.FromMilliseconds(1));
+                        await UpdateDatabaseAsync(items, SQLiteAsyncConnection);
+
+                    }
+                    catch(Exception Exception)
+                    {
+                        Debug.WriteLine("Exception:"+ Exception);
+                    }
                 });
             }
             public static async Task UpdateDatabaseAsync(IEnumerable<T> items,SQLiteAsyncConnection SQLiteAsyncConnection)
             {
                 await SQLiteAsyncConnection.RunInTransactionAsync(nonAsyncConnection =>
                 {
+                    //nonAsyncConnection.Delete
                     foreach (var item in items)
                     {
                         nonAsyncConnection.InsertOrReplace(item);
                     }
+                    //SortedList<T> incomingElements;
+                    //SortedList<T> DatabaseElements;
                 });
             }
         }

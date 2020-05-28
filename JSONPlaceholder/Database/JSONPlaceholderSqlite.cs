@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using JSONPlaceholder.Entities;
+using JSONPlaceholder.Util;
 using SQLite;
 
 namespace JSONPlaceholder.Database
@@ -10,11 +13,18 @@ namespace JSONPlaceholder.Database
     {
         public readonly SQLiteAsyncConnection SQLiteAsyncConnection;
 
+        readonly AsyncLock asyncLock = new AsyncLock();
+
         private bool isInitialized = false;
 
         public JSONPlaceholderSqlite(string dbPath)
         {
             SQLiteAsyncConnection = new SQLiteAsyncConnection(dbPath);
+            _ = Task.Run
+                (
+                    async () =>
+                        await InitializeAsync()
+                );
         }
 
         public void Initialize()
@@ -24,15 +34,29 @@ namespace JSONPlaceholder.Database
 
         public async Task InitializeAsync()
         {
-            if( ! isInitialized )
+            using ( await asyncLock.LockAsync() )
             {
-                await SQLiteAsyncConnection.CreateTableAsync<Post>();
-                await SQLiteAsyncConnection.CreateTableAsync<Comment>();
-                await SQLiteAsyncConnection.CreateTableAsync<Album>();
-                await SQLiteAsyncConnection.CreateTableAsync<Photo>();
-                await SQLiteAsyncConnection.CreateTableAsync<Todo>();
-                await SQLiteAsyncConnection.CreateTableAsync<User>();
-                isInitialized = true;
+                try
+                {
+                    if (!isInitialized)
+                    {
+                        await SQLiteAsyncConnection.CreateTableAsync<Post>();
+                        await SQLiteAsyncConnection.CreateTableAsync<Comment>();
+                        await SQLiteAsyncConnection.CreateTableAsync<Album>();
+                        await SQLiteAsyncConnection.CreateTableAsync<Photo>();
+                        await SQLiteAsyncConnection.CreateTableAsync<Todo>();
+                        await SQLiteAsyncConnection.CreateTableAsync<User>();
+                        isInitialized = true;
+                    }
+                }
+                catch (Exception Exception)
+                {
+                    Debug.WriteLine("Exception:" + Exception);
+                }
+                finally
+                {
+
+                }
             }
         }
 

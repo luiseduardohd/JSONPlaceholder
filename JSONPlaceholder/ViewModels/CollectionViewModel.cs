@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using AsyncAwaitBestPractices.MVVM;
 using JSONPlaceholder.Entities;
@@ -12,9 +14,15 @@ namespace JSONPlaceholder.ViewModels
 {
     public class CollectionViewModel <T>: BaseViewModel<T,int>
     {
-        public RangeObservableCollection<T> Items { get; set; }
+        RangeObservableCollection<T> items = new RangeObservableCollection<T>();
+        public RangeObservableCollection<T> Items
+        {
+            get { return items; }
+            set { SetProperty(ref items, value); }
+        }
         public Command LoadItemsCommand { get; set; }
         public AsyncCommand<T> AddItemCommand { get; set; }
+        
 
         public CollectionViewModel()
         {
@@ -23,8 +31,9 @@ namespace JSONPlaceholder.ViewModels
             BindingBase.EnableCollectionSynchronization(Items, null, ObservableCollectionCallback);
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             AddItemCommand = new AsyncCommand<T>(async (item) => await ExecuteAddItemCommand(item));
-
+            
         }
+
         void ObservableCollectionCallback(IEnumerable collection, object context, Action accessMethod, bool writeAccess)
         {
             lock (collection)
@@ -60,6 +69,19 @@ namespace JSONPlaceholder.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        protected bool SetProperty(ref IEnumerable<T> backingStore, IEnumerable<T> value,
+            [CallerMemberName]string propertyName = "",
+            Action onChanged = null)
+        {
+            //if (EqualityComparer<T>.Default.Equals(backingStore, value))
+            //    return false;
+
+            backingStore = value;
+            onChanged?.Invoke();
+            OnPropertyChanged(propertyName);
+            return true;
         }
     }
 }
