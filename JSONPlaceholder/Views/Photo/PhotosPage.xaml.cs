@@ -20,15 +20,14 @@ namespace JSONPlaceholder.Views
         private PhotosViewModel photosViewModel;
 
         public PhotosPage()
+            :this(new PhotosViewModel())
         {
-            InitializeComponent();
-
-            BindingContext = viewModel = new PhotosViewModel();
         }
 
-        public PhotosPage(PhotosViewModel photosViewModel)
+        public PhotosPage(PhotosViewModel photosViewModel):base()
         {
-            this.photosViewModel = photosViewModel;
+            InitializeComponent();
+            BindingContext = viewModel = photosViewModel;
         }
 
         async void OnItemSelected(object sender, EventArgs args)

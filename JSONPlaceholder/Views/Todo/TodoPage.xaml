@@ -3,9 +3,9 @@
     <ScrollView>
         <StackLayout Spacing="20" Padding="15">
             <Label Text="Title:" FontSize="Medium" />
-            <Label Text="{Binding Todo.Title}" d:Text="Todo name" FontSize="Small" />
+            <Label Text="{Binding Item.Title}" d:Text="Todo name" FontSize="Small" />
             <Label Text="Completed:" FontSize="Medium" />
-            <Label Text="{Binding Todo.Completed}" d:Text="Todo description" FontSize="Small" />
+            <Label Text="{Binding Item.Completed}" d:Text="Todo description" FontSize="Small" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

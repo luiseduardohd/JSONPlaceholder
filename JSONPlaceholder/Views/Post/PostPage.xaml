@@ -6,6 +6,7 @@
             <Label Text="{Binding Item.Title}" FontSize="Small" />
             <Label Text="Body:" FontSize="Medium" />
             <Label Text="{Binding Item.Body}" FontSize="Small" />
+            <Button Text="Comments" Clicked="OnCommentsButtonClicked" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

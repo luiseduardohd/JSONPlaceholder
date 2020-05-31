@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using JSONPlaceholder.Entities;
@@ -8,8 +9,18 @@ namespace JSONPlaceholder.ViewModels
 {
     public class CommentsViewModel : CollectionViewModel<Comment>
     {
-        public CommentsViewModel() : base()
+        private Func<Task<ObservableCollection<Comment>>> GetItems;
+
+        public CommentsViewModel()
+            :this(
+                 App.jsonPlaceholder.GetCommentsAsync
+            )
         {
+        }
+
+        public CommentsViewModel(Func<Task<ObservableCollection<Comment>>> getItems) : base()
+        {
+            this.GetItems = getItems;
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
@@ -20,7 +31,7 @@ namespace JSONPlaceholder.ViewModels
             try
             {
                 Items.Clear();
-                var items = await App.jsonPlaceholder.GetCommentsAsync();
+                var items = await GetItems();
                 Items.AddRange(items);
             }
             catch (Exception ex)

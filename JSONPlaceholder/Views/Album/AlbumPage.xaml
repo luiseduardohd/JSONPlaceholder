@@ -4,6 +4,7 @@
         <StackLayout Spacing="20" Padding="15">
             <Label Text="Title:" FontSize="Medium" />
             <Label Text="{Binding Item.Title}"  FontSize="Small" />
+            <Button Text="Photos" Clicked="OnPhotosButtonClicked" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

@@ -16,12 +16,17 @@ namespace JSONPlaceholder.Views
     public partial class CommentsPage : ContentPage
     {
         CommentsViewModel viewModel;
+        //private CommentsViewModel commentsViewModel;
 
         public CommentsPage()
+            :this(new CommentsViewModel())
+        {
+        }
+
+        public CommentsPage(CommentsViewModel commentsViewModel)
         {
             InitializeComponent();
-
-            BindingContext = viewModel = new CommentsViewModel();
+            BindingContext = this.viewModel = commentsViewModel;
         }
 
         async void OnItemSelected(object sender, EventArgs args)
