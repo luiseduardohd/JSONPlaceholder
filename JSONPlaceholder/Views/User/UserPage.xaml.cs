@@ -5,6 +5,8 @@ using Xamarin.Forms.Xaml;
 
 using JSONPlaceholder.Entities;
 using JSONPlaceholder.ViewModels;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace JSONPlaceholder.Views
 {
@@ -32,6 +34,30 @@ namespace JSONPlaceholder.Views
 
             viewModel = new UserViewModel(item);
             BindingContext = viewModel;
+        }
+
+        async void OnAlbumsButtonClicked(object sender, EventArgs args)
+        {
+            var layout = (BindableObject)sender;
+            var User = viewModel.Item;
+            Func<Task<ObservableCollection<Album>>> getItems = async () => await App.jsonPlaceholder.GetAlbumsAsync(User);
+            await Navigation.PushAsync(new AlbumsPage(new AlbumsViewModel(getItems)));
+        }
+
+        async void OnPostsButtonClicked(object sender, EventArgs args)
+        {
+            var layout = (BindableObject)sender;
+            var User = viewModel.Item;
+            Func<Task<ObservableCollection<Post>>> getItems = async () => await App.jsonPlaceholder.GetPostsAsync(User);
+            await Navigation.PushAsync(new PostsPage(new PostsViewModel(getItems)));
+        }
+
+        async void OnTodosButtonClicked(object sender, EventArgs args)
+        {
+            var layout = (BindableObject)sender;
+            var User = viewModel.Item;
+            Func<Task<ObservableCollection<Todo>>> getItems = async () => await App.jsonPlaceholder.GetTodosAsync(User);
+            await Navigation.PushAsync(new TodosPage(new TodosViewModel(getItems)));
         }
     }
 }

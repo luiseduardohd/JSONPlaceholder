@@ -17,12 +17,18 @@ namespace JSONPlaceholder.Views
     public partial class PhotosPage : ContentPage
     {
         PhotosViewModel viewModel;
+        private PhotosViewModel photosViewModel;
 
         public PhotosPage()
         {
             InitializeComponent();
 
             BindingContext = viewModel = new PhotosViewModel();
+        }
+
+        public PhotosPage(PhotosViewModel photosViewModel)
+        {
+            this.photosViewModel = photosViewModel;
         }
 
         async void OnItemSelected(object sender, EventArgs args)

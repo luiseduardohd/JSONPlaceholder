@@ -17,12 +17,16 @@ namespace JSONPlaceholder.Views
     public partial class PostsPage : ContentPage
     {
         PostsViewModel viewModel;
+        //private PostsViewModel postsViewModel;
 
-        public PostsPage()
+        public PostsPage():this(new PostsViewModel())
+        {
+        }
+
+        public PostsPage(PostsViewModel postsViewModel)
         {
             InitializeComponent();
-
-            BindingContext = viewModel = new PostsViewModel();
+            BindingContext = this.viewModel = postsViewModel;
         }
 
         async void OnItemSelected(object sender, EventArgs args)
@@ -36,7 +40,7 @@ namespace JSONPlaceholder.Views
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
+            if (viewModel.Items?.Count == 0)
                 viewModel.IsBusy = true;
         }
     }

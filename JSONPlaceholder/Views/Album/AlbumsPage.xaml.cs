@@ -17,12 +17,17 @@ namespace JSONPlaceholder.Views
     public partial class AlbumsPage : ContentPage
     {
         AlbumsViewModel viewModel;
+        //private AlbumsViewModel albumsViewModel;
 
         public AlbumsPage()
+            :this(new AlbumsViewModel())
+        {
+        }
+
+        public AlbumsPage(AlbumsViewModel albumsViewModel)
         {
             InitializeComponent();
-
-            BindingContext = viewModel = new AlbumsViewModel();
+            BindingContext = this.viewModel = albumsViewModel;
         }
 
         async void OnItemSelected(object sender, EventArgs args)
@@ -36,7 +41,7 @@ namespace JSONPlaceholder.Views
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
+            if (viewModel.Items?.Count == 0)
                 viewModel.IsBusy = true;
         }
     }

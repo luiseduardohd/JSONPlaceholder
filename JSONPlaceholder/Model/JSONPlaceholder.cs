@@ -35,7 +35,7 @@ namespace JSONPlaceholder.Model
             return rangeObservableCollection;
         }
 
-        public async Task<ObservableCollection<Post>> GetPostAsync(User user)
+        public async Task<ObservableCollection<Post>> GetPostsAsync(User user)
         {
             var rangeObservableCollection = await Cacheable<Post>.GetItemAsync(
                 async () => await JSONPlaceholderSqlite.GetPostsAsync(user),
@@ -250,6 +250,8 @@ namespace JSONPlaceholder.Model
                     //SortedList<T> DatabaseElements;
                 });
             }
+
+
         }
     }
 }

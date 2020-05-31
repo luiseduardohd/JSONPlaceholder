@@ -17,12 +17,17 @@ namespace JSONPlaceholder.Views
     public partial class TodosPage : ContentPage
     {
         TodosViewModel viewModel;
+        //private TodosViewModel todosViewModel;
 
-        public TodosPage()
+        public TodosPage():this(new TodosViewModel())
+        {
+        }
+
+        public TodosPage(TodosViewModel todosViewModel)
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new TodosViewModel();
+            BindingContext = this.viewModel = todosViewModel;
         }
 
         async void OnItemSelected(object sender, EventArgs args)
@@ -36,7 +41,7 @@ namespace JSONPlaceholder.Views
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
+            if (viewModel.Items?.Count == 0)
                 viewModel.IsBusy = true;
         }
     }

@@ -30,6 +30,9 @@
             <Label Text="{Binding Item.Company.CatchPhrase}"  FontSize="Small" />
             <Label Text="Company bs:" FontSize="Medium" />
             <Label Text="{Binding Item.Company.bs}"  FontSize="Small" />
+            <Button Text="Albums" Clicked="OnAlbumsButtonClicked" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" />
+            <Button Text="Posts" Clicked="OnPostsButtonClicked" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" />
+            <Button Text="Todos" Clicked="OnTodosButtonClicked" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

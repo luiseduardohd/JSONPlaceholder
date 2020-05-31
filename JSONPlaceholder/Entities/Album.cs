@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
+using Nito.AsyncEx;
+using SQLite;
 
 namespace JSONPlaceholder.Entities
 {
@@ -10,5 +13,11 @@ namespace JSONPlaceholder.Entities
 
         [JsonProperty("title")]
         public String Title { get; set; }
+
+        /*
+        [Ignore]
+        [JsonIgnore]
+        public AsyncLazy<List<Photo>> Photos { get; set; }
+        */
     }
 }
