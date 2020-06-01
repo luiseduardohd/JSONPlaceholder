@@ -3,7 +3,7 @@
     <TabbedPage.Children>
         <NavigationPage Title="Users">
             <x:Arguments>
-                <views:UsersPage />
+                <views:UsersPage x:Name="UsersPage" />
             </x:Arguments>
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
@@ -13,7 +13,7 @@
         </NavigationPage>
         <NavigationPage Title="Albums">
             <x:Arguments>
-                <views:AlbumsPage />
+                <views:AlbumsPage x:Name="AlbumsPage"  />
             </x:Arguments>
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
@@ -23,7 +23,7 @@
         </NavigationPage>
         <NavigationPage Title="Photos">
             <x:Arguments>
-                <views:PhotoGroupPage />
+                <views:PhotoGroupPage x:Name="PhotosPage" />
             </x:Arguments>
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
@@ -33,7 +33,7 @@
         </NavigationPage>
         <NavigationPage Title="Posts">
             <x:Arguments>
-                <views:PostsPage />
+                <views:PostsPage x:Name="PostsPage" />
             </x:Arguments>
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
@@ -43,7 +43,7 @@
         </NavigationPage>
         <NavigationPage Title="Comments">
             <x:Arguments>
-                <views:CommentsPage />
+                <views:CommentsPage x:Name="CommentsPage" />
             </x:Arguments>
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">

@@ -12,6 +12,6 @@ namespace JSONPlaceholder.Entities
         public String CatchPhrase { get; set; }
 
         [JsonProperty("bs")]
-        public String bs { get; set; }
+        public String Bs { get; set; }
     }
 }
