@@ -43,6 +43,7 @@ namespace JSONPlaceholder
             InitializeComponent();
 
             MainPage = new MainPage();
+            //Seems like there is a bug that dont let me avoid to use attributes
             JsonConvert.DefaultSettings =
                 () => new JsonSerializerSettings()
                 {
