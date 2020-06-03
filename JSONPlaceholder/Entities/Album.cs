@@ -14,10 +14,5 @@ namespace JSONPlaceholder.Entities
         [JsonProperty("title")]
         public String Title { get; set; }
 
-        /*
-        [Ignore]
-        [JsonIgnore]
-        public AsyncLazy<List<Photo>> Photos { get; set; }
-        */
     }
 }

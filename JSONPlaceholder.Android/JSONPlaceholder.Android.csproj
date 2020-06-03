@@ -93,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JSONPlaceholder\JSONPlaceholder.csproj">
-      <Project>{D6FCB15E-69FA-4107-ADA6-5FAFC4522BBD}</Project>
+      <Project>{8F7B2ECE-522C-463B-986F-F01959219AE8}</Project>
       <Name>JSONPlaceholder</Name>
     </ProjectReference>
   </ItemGroup>

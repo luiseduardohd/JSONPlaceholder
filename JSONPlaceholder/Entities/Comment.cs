@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 
 namespace JSONPlaceholder.Entities
 {
     public class Comment : Entity<int>
     {
+        [ForeignKey(nameof(Post))]
         [JsonProperty("postId")]
         public int PostId { get; set; }
 

@@ -5,6 +5,7 @@ using Nito.AsyncEx;
 using SQLite;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JSONPlaceholder.Entities
 {
@@ -12,16 +13,9 @@ namespace JSONPlaceholder.Entities
     {
         public Post()
         {
-            /*
-            Comments 
-            = new AsyncLazy<ObservableCollection<Comment>>(
-                    async () => {
-                        return await App.jsonPlaceholder.GetCommentsAsync(this);
-                    }
-                );
-            */
         }
 
+        [ForeignKey(nameof(User))]
         [JsonProperty("userId")]
         public int UserId { get; set; }
 
@@ -31,10 +25,5 @@ namespace JSONPlaceholder.Entities
         [JsonProperty("body")]
         public String Body { get; set; }
 
-        /*
-        [Ignore]
-        [JsonIgnore]
-        public AsyncLazy<ObservableCollection<Comment>> Comments { get; set; }
-        */
     }
 }

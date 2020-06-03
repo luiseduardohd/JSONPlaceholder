@@ -19,27 +19,5 @@ namespace JSONPlaceholder.Entities
         [JsonProperty("thumbnailUrl")]
         public String ThumbnailUrl { get; set; }
 
-        /* 
-        #region SQLiteUtil
-        [Ignore]
-        [JsonIgnore]
-        public byte[] ImageByteArray { get; set; }
-
-        [Ignore]
-        [JsonIgnore]
-        public String ImageBase64
-        {
-            get
-            {
-                return ImageByteArray.ToBase64();
-            }
-            set
-            {
-                this.ImageByteArray = value.ToByteArray();
-            }
-        }
-
-        #endregion
-        */
     }
 }

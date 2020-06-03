@@ -11,26 +11,6 @@ namespace JSONPlaceholder.Entities
     {
         public User()
         {
-            /*
-            this.Albums
-            = new AsyncLazy<ObservableCollection<Album>>(
-                    async () => {
-                        return await App.jsonPlaceholder.GetAlbumsAsync(this);
-                    }
-                );
-            this.Posts
-            = new AsyncLazy<ObservableCollection<Post>>(
-                    async () => {
-                        return await App.jsonPlaceholder.GetPostsAsync(this);
-                    }
-                );
-            this.Todos
-            = new AsyncLazy<ObservableCollection<Todo>>(
-                    async () => {
-                        return await App.jsonPlaceholder.GetTodosAsync(this);
-                    }
-                );
-            */
         }
 
         [JsonProperty("name")]
@@ -56,23 +36,6 @@ namespace JSONPlaceholder.Entities
         [Ignore]
         [JsonProperty("company")]
         public Company Company { get; set; }
-
-
-
-        /*
-        [Ignore]
-        [JsonIgnore]
-        public AsyncLazy<ObservableCollection<Album>> Albums { get; set; }
-
-        [Ignore]
-        [JsonIgnore]
-        public AsyncLazy<ObservableCollection<Post>> Posts { get; set; }
-
-        [Ignore]
-        [JsonIgnore]
-        public AsyncLazy<ObservableCollection<Todo>> Todos { get; set; }
-        */
-
 
         #region SQLiteUtil
 
