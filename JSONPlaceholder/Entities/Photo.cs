@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using JSONPlaceholder.Util;
 using Newtonsoft.Json;
 using SQLite;
@@ -7,6 +8,7 @@ namespace JSONPlaceholder.Entities
 {
     public class Photo : Entity<int>
     {
+        [ForeignKey(nameof(Album))]
         [JsonProperty("albumId")]
         public int AlbumId { get; set; }
 

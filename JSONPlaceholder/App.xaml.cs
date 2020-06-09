@@ -41,7 +41,7 @@ namespace JSONPlaceholder
         public App()
         {
             InitializeComponent();
-
+            Cacheable<Comment>.WebCallExceptionHandler = new 
             MainPage = new MainPage();
             //Seems like there is a bug that dont let me avoid to use attributes
             JsonConvert.DefaultSettings =
