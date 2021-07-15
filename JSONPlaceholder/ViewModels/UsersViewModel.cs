@@ -13,15 +13,15 @@ namespace JSONPlaceholder.ViewModels
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
+
         protected override async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
 
             try
             {
-                Items.Clear();
-                var items = await App.jsonPlaceholder.GetUsersAsync();
-                Items.AddRange(items);
+                Items = await App.jsonPlaceholder.GetUsersAsync();
+                BindingBase.EnableCollectionSynchronization(Items, null, ObservableCollectionCallback);
             }
             catch (Exception ex)
             {

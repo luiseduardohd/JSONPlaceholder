@@ -16,41 +16,16 @@ namespace JSONPlaceholder.Util
         public static ExceptionHandler ExceptionHandler;
         public static ExceptionHandler WebCallExceptionHandler;
         public static ExceptionHandler DatabaseExceptionHandler;
+        public static ExceptionHandler NoInternetConnectionExceptionHandler;
 
-        public static async Task<ObservableCollection<T>> GetItemAsync(Func<Task<IEnumerable<T>>> databaseAction, Func<Task<IEnumerable<T>>> webServiceAction, SQLiteAsyncConnection SQLiteAsyncConnection)
+        public static async Task<RangeObservableCollection<T>> GetItemAsync(Func<Task<IEnumerable<T>>> databaseAction, Func<Task<IEnumerable<T>>> webServiceAction, SQLiteAsyncConnection SQLiteAsyncConnection)
         {
             var rangeObservableCollection = new RangeObservableCollection<T>();
 
             try
             {
-                var current = Connectivity.NetworkAccess;
-
-                if (current == NetworkAccess.Internet)
-                {
-                    var items = await webServiceAction();
-                    rangeObservableCollection.AddRange(items);
-
-                    UpdateDatabaseInBackground(items, SQLiteAsyncConnection);
-                }
-                else
-                {
-                    var items = await databaseAction();
-                    rangeObservableCollection.AddRange(items);
-                }
-            }
-            catch (ApiException Exception)
-            {
-                Debug.WriteLine("Exception:" + Exception);
-                var items = await databaseAction();
-                rangeObservableCollection.AddRange(items);
-                WebCallExceptionHandler?.HandleException(Exception);
-            }
-            catch (SocketException Exception)
-            {
-                Debug.WriteLine("Exception:" + Exception);
-                var items = await databaseAction();
-                rangeObservableCollection.AddRange(items);
-                WebCallExceptionHandler?.HandleException(Exception);
+                await RetrieveFromDatabase(rangeObservableCollection, databaseAction, SQLiteAsyncConnection);
+                UpdateInBackground(rangeObservableCollection, webServiceAction, SQLiteAsyncConnection);
             }
             catch (Exception Exception)
             {
@@ -62,18 +37,43 @@ namespace JSONPlaceholder.Util
 
         }
 
-        public static void UpdateInBackground(RangeObservableCollection<T> rangeObservableCollection, IEnumerable<T> items, Func<Task<IEnumerable<T>>> webServiceAction, SQLiteAsyncConnection SQLiteAsyncConnection)
+        public static async Task RetrieveFromDatabase(RangeObservableCollection<T> rangeObservableCollection, Func<Task<IEnumerable<T>>> databaseAction, SQLiteAsyncConnection SQLiteAsyncConnection)
+        {
+            var items = await databaseAction();
+            rangeObservableCollection.AddRange(items);
+        }
+
+        public static void UpdateInBackground(RangeObservableCollection<T> rangeObservableCollection, Func<Task<IEnumerable<T>>> webServiceAction, SQLiteAsyncConnection SQLiteAsyncConnection)
         {
             _ = Task.Run(async () =>
             {
-                await Task.Delay(TimeSpan.FromMilliseconds(1));
-                await UpdateAsync(rangeObservableCollection, items, webServiceAction, SQLiteAsyncConnection);
+                await Task.Delay(TimeSpan.FromMilliseconds(100));
+                await TryUpdateAsync(rangeObservableCollection, webServiceAction, SQLiteAsyncConnection);
             });
         }
-        public static async Task UpdateAsync(RangeObservableCollection<T> rangeObservableCollection, IEnumerable<T> items, Func<Task<IEnumerable<T>>> webServiceAction, SQLiteAsyncConnection SQLiteAsyncConnection)
+        public static async Task TryUpdateAsync(RangeObservableCollection<T> rangeObservableCollection, Func<Task<IEnumerable<T>>> webServiceAction, SQLiteAsyncConnection SQLiteAsyncConnection)
         {
-            items = await webServiceAction();
+            try
+            {
+                await UpdateAsync(rangeObservableCollection, webServiceAction,  SQLiteAsyncConnection);
+            }
+            catch (ApiException Exception)
+            {
+                Debug.WriteLine("Exception:" + Exception);
+                WebCallExceptionHandler?.HandleException(Exception);
+            }
+            catch (SocketException Exception)
+            {
+                Debug.WriteLine("Exception:" + Exception);
+                WebCallExceptionHandler?.HandleException(Exception);
+            }
+        }
+        public static async Task UpdateAsync(RangeObservableCollection<T> rangeObservableCollection, Func<Task<IEnumerable<T>>> webServiceAction, SQLiteAsyncConnection SQLiteAsyncConnection)
+        {
+            var items = await webServiceAction();
+            //await Task.Delay(TimeSpan.FromMilliseconds(100));
             rangeObservableCollection.ClearRange();
+            //await Task.Delay(TimeSpan.FromMilliseconds(100));
             rangeObservableCollection.AddRange(items);
             UpdateDatabaseInBackground(items, SQLiteAsyncConnection);
         }
@@ -96,7 +96,7 @@ namespace JSONPlaceholder.Util
         {
             await SQLiteAsyncConnection.RunInTransactionAsync(nonAsyncConnection =>
             {
-                //nonAsyncConnection.Delete
+                nonAsyncConnection.DeleteAll<T>();
                 foreach (var item in items)
                 {
                     nonAsyncConnection.InsertOrReplace(item);

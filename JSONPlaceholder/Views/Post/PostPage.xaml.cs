@@ -7,6 +7,7 @@ using JSONPlaceholder.Entities;
 using JSONPlaceholder.ViewModels;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using JSONPlaceholder.Util;
 
 namespace JSONPlaceholder.Views
 {
@@ -26,7 +27,7 @@ namespace JSONPlaceholder.Views
         {
             var layout = (BindableObject)sender;
             var post = viewModel.Item;
-            Func<Task<ObservableCollection<Comment>>> getItems = async () => await App.jsonPlaceholder.GetCommentsAsync(post);
+            Func<Task<RangeObservableCollection<Comment>>> getItems = async () => await App.jsonPlaceholder.GetCommentsAsync(post);
             await Navigation.PushAsync(new CommentsPage(new CommentsViewModel(getItems)));
         }
     }

@@ -3,13 +3,14 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using JSONPlaceholder.Entities;
+using JSONPlaceholder.Util;
 using Xamarin.Forms;
 
 namespace JSONPlaceholder.ViewModels
 {
     public class CommentsViewModel : CollectionViewModel<Comment>
     {
-        private Func<Task<ObservableCollection<Comment>>> GetItems;
+        private Func<Task<RangeObservableCollection<Comment>>> GetItems;
 
         public CommentsViewModel()
             :this(
@@ -18,7 +19,7 @@ namespace JSONPlaceholder.ViewModels
         {
         }
 
-        public CommentsViewModel(Func<Task<ObservableCollection<Comment>>> getItems) : base()
+        public CommentsViewModel(Func<Task<RangeObservableCollection<Comment>>> getItems) : base()
         {
             this.GetItems = getItems;
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
@@ -30,9 +31,8 @@ namespace JSONPlaceholder.ViewModels
 
             try
             {
-                Items.Clear();
-                var items = await GetItems();
-                Items.AddRange(items);
+                Items = await GetItems();
+                BindingBase.EnableCollectionSynchronization(Items, null, ObservableCollectionCallback);
             }
             catch (Exception ex)
             {

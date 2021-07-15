@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using JSONPlaceholder.Entities;
 
 namespace JSONPlaceholder.ViewModels
@@ -8,5 +9,10 @@ namespace JSONPlaceholder.ViewModels
         public UserViewModel(User item) : base(item)
         {
         }
+        protected async Task InitializeAsync()
+        {
+            
+        }
+
     }
 }

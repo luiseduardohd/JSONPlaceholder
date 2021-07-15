@@ -7,6 +7,7 @@ using JSONPlaceholder.Entities;
 using JSONPlaceholder.ViewModels;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using JSONPlaceholder.Util;
 
 namespace JSONPlaceholder.Views
 {
@@ -40,7 +41,7 @@ namespace JSONPlaceholder.Views
         {
             var layout = (BindableObject)sender;
             var User = viewModel.Item;
-            Func<Task<ObservableCollection<Album>>> getItems = async () => await App.jsonPlaceholder.GetAlbumsAsync(User);
+            Func<Task<RangeObservableCollection<Album>>> getItems = async () => await App.jsonPlaceholder.GetAlbumsAsync(User);
             await Navigation.PushAsync(new AlbumsPage(new AlbumsViewModel(getItems)));
         }
 
@@ -48,7 +49,7 @@ namespace JSONPlaceholder.Views
         {
             var layout = (BindableObject)sender;
             var User = viewModel.Item;
-            Func<Task<ObservableCollection<Post>>> getItems = async () => await App.jsonPlaceholder.GetPostsAsync(User);
+            Func<Task<RangeObservableCollection<Post>>> getItems = async () => await App.jsonPlaceholder.GetPostsAsync(User);
             await Navigation.PushAsync(new PostsPage(new PostsViewModel(getItems)));
         }
 
@@ -56,7 +57,7 @@ namespace JSONPlaceholder.Views
         {
             var layout = (BindableObject)sender;
             var User = viewModel.Item;
-            Func<Task<ObservableCollection<Todo>>> getItems = async () => await App.jsonPlaceholder.GetTodosAsync(User);
+            Func<Task<RangeObservableCollection<Todo>>> getItems = async () => await App.jsonPlaceholder.GetTodosAsync(User);
             await Navigation.PushAsync(new TodosPage(new TodosViewModel(getItems)));
         }
     }

@@ -15,7 +15,7 @@ using Xamarin.Essentials;
 
 namespace JSONPlaceholder.Model
 {
-    public class JSONPlaceholder
+    public class JSONPlaceholder 
     {
         private JSONPlaceholderSqlite JSONPlaceholderSqlite;
         private IJSONPlaceholder JSONPlaceholderWebService;
@@ -25,7 +25,7 @@ namespace JSONPlaceholder.Model
             this.JSONPlaceholderSqlite = JSONPlaceholderSqlite;
             this.JSONPlaceholderWebService = JSONPlaceholderWebService;
         }
-        public async Task<ObservableCollection<Post>> GetPostsAsync()
+        public async Task<RangeObservableCollection<Post>> GetPostsAsync()
         {
             var rangeObservableCollection = await Cacheable<Post>.GetItemAsync(
                 async () => await JSONPlaceholderSqlite.GetPostsAsync(),
@@ -35,7 +35,7 @@ namespace JSONPlaceholder.Model
             return rangeObservableCollection;
         }
 
-        public async Task<ObservableCollection<Post>> GetPostsAsync(User user)
+        public async Task<RangeObservableCollection<Post>> GetPostsAsync(User user)
         {
             var rangeObservableCollection = await Cacheable<Post>.GetItemAsync(
                 async () => await JSONPlaceholderSqlite.GetPostsAsync(user),
@@ -46,7 +46,7 @@ namespace JSONPlaceholder.Model
         }
         
 
-        public async Task<ObservableCollection<Comment>> GetCommentsAsync()
+        public async Task<RangeObservableCollection<Comment>> GetCommentsAsync()
         {
             var rangeObservableCollection = await Cacheable<Comment>.GetItemAsync(
                 async () => await JSONPlaceholderSqlite.GetCommentsAsync(),
@@ -57,7 +57,7 @@ namespace JSONPlaceholder.Model
         }
 
 
-        public async Task<ObservableCollection<Comment>> GetCommentsAsync(Post post)
+        public async Task<RangeObservableCollection<Comment>> GetCommentsAsync(Post post)
         {
             var rangeObservableCollection = await Cacheable<Comment>.GetItemAsync(
                 async () => await JSONPlaceholderSqlite.GetCommentsAsync(post),
@@ -70,7 +70,7 @@ namespace JSONPlaceholder.Model
 
 
 
-        public async Task<ObservableCollection<Album>> GetAlbumsAsync()
+        public async Task<RangeObservableCollection<Album>> GetAlbumsAsync()
         {
             var rangeObservableCollection = await Cacheable<Album>.GetItemAsync(
                 async () => await JSONPlaceholderSqlite.GetAlbumsAsync(),
@@ -81,7 +81,7 @@ namespace JSONPlaceholder.Model
         }
 
 
-        public async Task<ObservableCollection<Album>> GetAlbumsAsync(User user)
+        public async Task<RangeObservableCollection<Album>> GetAlbumsAsync(User user)
         {
             var rangeObservableCollection = await Cacheable<Album>.GetItemAsync(
                 async () => await JSONPlaceholderSqlite.GetAlbumsAsync(user),
@@ -95,7 +95,7 @@ namespace JSONPlaceholder.Model
         //Task<Album> GetAlbumAsync(int albumId);
 
 
-        public async Task<ObservableCollection<Photo>> GetPhotosAsync()
+        public async Task<RangeObservableCollection<Photo>> GetPhotosAsync()
         {
             var rangeObservableCollection = await Cacheable<Photo>.GetItemAsync(
                 async () => await JSONPlaceholderSqlite.GetPhotosAsync(),
@@ -105,7 +105,7 @@ namespace JSONPlaceholder.Model
             return rangeObservableCollection;
         }
 
-        public async Task<ObservableCollection<Photo>> GetPhotosAsync(Album album)
+        public async Task<RangeObservableCollection<Photo>> GetPhotosAsync(Album album)
         {
             var rangeObservableCollection = await Cacheable<Photo>.GetItemAsync(
                 async () => await JSONPlaceholderSqlite.GetPhotosAsync(album),
@@ -120,7 +120,7 @@ namespace JSONPlaceholder.Model
         //Task<Photo> GetPhotoAsync(int photoId);
 
 
-        public async Task<ObservableCollection<Todo>> GetTodosAsync()
+        public async Task<RangeObservableCollection<Todo>> GetTodosAsync()
         {
             var rangeObservableCollection = await Cacheable<Todo>.GetItemAsync(
                 async () => await JSONPlaceholderSqlite.GetTodosAsync(),
@@ -131,7 +131,7 @@ namespace JSONPlaceholder.Model
         }
 
 
-        public async Task<ObservableCollection<Todo>> GetTodosAsync(User user)
+        public async Task<RangeObservableCollection<Todo>> GetTodosAsync(User user)
         {
             var rangeObservableCollection = await Cacheable<Todo>.GetItemAsync(
                 async () => await JSONPlaceholderSqlite.GetTodosAsync(user),
@@ -145,7 +145,7 @@ namespace JSONPlaceholder.Model
         //Task<Todo> GetTodoAsync(int todoId);
 
 
-        public async Task<ObservableCollection<User>> GetUsersAsync()
+        public async Task<RangeObservableCollection<User>> GetUsersAsync()
         {
 
             var rangeObservableCollection = await Cacheable<User>.GetItemAsync(

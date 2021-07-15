@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using JSONPlaceholder.Entities;
+using JSONPlaceholder.Util;
 using Nito.AsyncEx;
 using Xamarin.Forms;
 
@@ -12,7 +13,7 @@ namespace JSONPlaceholder.ViewModels
     {
         //private AsyncLazy<ObservableCollection<Post>> asyncPosts;
 
-        private Func<Task<ObservableCollection<Post>>> GetItems;
+        private Func<Task<RangeObservableCollection<Post>>> GetItems;
 
         public PostsViewModel()
             : this(App.jsonPlaceholder.GetPostsAsync)
@@ -27,7 +28,7 @@ namespace JSONPlaceholder.ViewModels
         }
 
         //public PostsViewModel(AsyncLazy<ObservableCollection<Post>> asyncPosts):base()
-        public PostsViewModel(Func<Task<ObservableCollection<Post>>> GetItems) : base()
+        public PostsViewModel(Func<Task<RangeObservableCollection<Post>>> GetItems) : base()
         {
             this.GetItems = GetItems;
             LoadItemsCommand = new Command(
@@ -41,9 +42,8 @@ namespace JSONPlaceholder.ViewModels
 
             try
             {
-                Items.Clear();
-                var items = await GetItems();
-                Items.AddRange(items);
+                Items = await GetItems();
+                BindingBase.EnableCollectionSynchronization(Items, null, ObservableCollectionCallback);
             }
             catch (Exception ex)
             {

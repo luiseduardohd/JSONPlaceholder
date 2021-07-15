@@ -7,6 +7,7 @@ using JSONPlaceholder.Entities;
 using JSONPlaceholder.ViewModels;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using JSONPlaceholder.Util;
 
 namespace JSONPlaceholder.Views
 {
@@ -26,7 +27,7 @@ namespace JSONPlaceholder.Views
         {
             var layout = (BindableObject)sender;
             var album= viewModel.Item;
-            Func<Task<ObservableCollection<Photo>>> getItems = async () => await App.jsonPlaceholder.GetPhotosAsync(album);
+            Func<Task<RangeObservableCollection<Photo>>> getItems = async () => await App.jsonPlaceholder.GetPhotosAsync(album);
             await Navigation.PushAsync(new PhotosPage(new PhotosViewModel(getItems)));
         }
     }

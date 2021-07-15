@@ -27,14 +27,14 @@ namespace JSONPlaceholder.ViewModels
         public CollectionViewModel()
         {
             Title = "Browse";
-            Items = new RangeObservableCollection<T>();
-            BindingBase.EnableCollectionSynchronization(Items, null, ObservableCollectionCallback);
+            //Items = new RangeObservableCollection<T>();
+            //BindingBase.EnableCollectionSynchronization(Items, null, ObservableCollectionCallback);
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             AddItemCommand = new AsyncCommand<T>(async (item) => await ExecuteAddItemCommand(item));
             
         }
 
-        void ObservableCollectionCallback(IEnumerable collection, object context, Action accessMethod, bool writeAccess)
+        protected void ObservableCollectionCallback(IEnumerable collection, object context, Action accessMethod, bool writeAccess)
         {
             lock (collection)
             {
