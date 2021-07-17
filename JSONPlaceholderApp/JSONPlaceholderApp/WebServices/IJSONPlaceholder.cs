@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using JSONPlaceholder.Entities;
+using JSONPlaceholderApp.Entities;
 using Refit;
 
-namespace JSONPlaceholder.WebServices
+namespace JSONPlaceholderApp.WebServices
 {
     public interface IJSONPlaceholder
     {

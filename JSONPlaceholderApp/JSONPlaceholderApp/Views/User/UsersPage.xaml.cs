@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using JSONPlaceholder.Entities;
-using JSONPlaceholder.Views;
-using JSONPlaceholder.ViewModels;
+using JSONPlaceholderApp.Entities;
+using JSONPlaceholderApp.Views;
+using JSONPlaceholderApp.ViewModels;
+using System.Windows.Input;
 
-namespace JSONPlaceholder.Views
+namespace JSONPlaceholderApp.Views
 {
     [DesignTimeVisible(false)]
     public partial class UsersPage : ContentPage
@@ -20,7 +21,73 @@ namespace JSONPlaceholder.Views
 
         public UsersPage()
         {
-            InitializeComponent();
+            //InitializeComponent();
+
+            // Empiezo a editar
+
+            this.Title = "Users";
+
+            var usersDataTemplate = new DataTemplate(() =>
+            {
+                var labelName = new Label()
+                {
+                    LineBreakMode = LineBreakMode.NoWrap,
+                    FontSize = 16
+                };
+                labelName.SetBinding(Label.TextProperty, "Name");
+
+                var labelUserName = new Label()
+                {
+                    LineBreakMode = LineBreakMode.NoWrap,
+                    FontSize = 16
+                };
+                labelUserName.SetBinding(Label.TextProperty, "Username");
+
+                var labelEmail = new Label()
+                {
+                    LineBreakMode = LineBreakMode.NoWrap,
+                    FontSize = 16
+                };
+                labelEmail.SetBinding(Label.TextProperty, "Email");
+
+                var stackLayout = new StackLayout()
+                {
+                    Children =
+                    {
+                        labelName,
+                        labelUserName,
+                        labelEmail,
+ 
+                    }
+                };
+
+                var tapGestureRecognizer = new TapGestureRecognizer()
+                {
+                    NumberOfTapsRequired = 1,
+                };
+                tapGestureRecognizer.Tapped += OnItemSelected;
+                stackLayout.GestureRecognizers.Add(tapGestureRecognizer);
+                return stackLayout;
+            });
+
+            var collectionView = new CollectionView()
+            {
+                ItemTemplate = usersDataTemplate
+            };
+            collectionView.SetBinding(CollectionView.ItemsSourceProperty, "Items");
+
+            var refreshView = new RefreshView()
+            {
+                Content = collectionView
+            };
+            Binding binding = new Binding();
+            binding.Path = "IsBusy";
+            binding.Mode = BindingMode.TwoWay;
+            refreshView.SetBinding(RefreshView.IsRefreshingProperty, binding);
+            refreshView.SetBinding(RefreshView.CommandProperty, "LoadItemsCommand");
+            this.Content = refreshView;
+
+            // Termino de editar 
 
             BindingContext = viewModel = new UsersViewModel();
         }

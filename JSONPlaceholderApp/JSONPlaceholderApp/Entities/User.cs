@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using Nito.AsyncEx;
 using SQLite;
 
-namespace JSONPlaceholder.Entities
+namespace JSONPlaceholderApp.Entities
 {
     public class User : Entity<int>
     {

@@ -3,13 +3,12 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using JSONPlaceholder.Entities;
-using JSONPlaceholder.ViewModels;
+using JSONPlaceholderApp.Entities;
+using JSONPlaceholderApp.ViewModels;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using JSONPlaceholder.Util;
 
-namespace JSONPlaceholder.Views
+namespace JSONPlaceholderApp.Views
 {
     [DesignTimeVisible(false)]
     public partial class UserPage : ContentPage
@@ -41,7 +40,7 @@ namespace JSONPlaceholder.Views
         {
             var layout = (BindableObject)sender;
             var User = viewModel.Item;
-            Func<Task<RangeObservableCollection<Album>>> getItems = async () => await App.jsonPlaceholder.GetAlbumsAsync(User);
+            Func<Task<ObservableCollection<Album>>> getItems = async () => await App.jsonPlaceholder.GetAlbumsAsync(User);
             await Navigation.PushAsync(new AlbumsPage(new AlbumsViewModel(getItems)));
         }
 
@@ -49,7 +48,7 @@ namespace JSONPlaceholder.Views
         {
             var layout = (BindableObject)sender;
             var User = viewModel.Item;
-            Func<Task<RangeObservableCollection<Post>>> getItems = async () => await App.jsonPlaceholder.GetPostsAsync(User);
+            Func<Task<ObservableCollection<Post>>> getItems = async () => await App.jsonPlaceholder.GetPostsAsync(User);
             await Navigation.PushAsync(new PostsPage(new PostsViewModel(getItems)));
         }
 
@@ -57,7 +56,7 @@ namespace JSONPlaceholder.Views
         {
             var layout = (BindableObject)sender;
             var User = viewModel.Item;
-            Func<Task<RangeObservableCollection<Todo>>> getItems = async () => await App.jsonPlaceholder.GetTodosAsync(User);
+            Func<Task<ObservableCollection<Todo>>> getItems = async () => await App.jsonPlaceholder.GetTodosAsync(User);
             await Navigation.PushAsync(new TodosPage(new TodosViewModel(getItems)));
         }
     }

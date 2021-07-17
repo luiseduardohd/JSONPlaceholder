@@ -6,11 +6,11 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using AsyncAwaitBestPractices.MVVM;
-using JSONPlaceholder.Entities;
-using JSONPlaceholder.Util;
+using JSONPlaceholderApp.Entities;
+using JSONPlaceholderApp.Util;
 using Xamarin.Forms;
 
-namespace JSONPlaceholder.ViewModels
+namespace JSONPlaceholderApp.ViewModels
 {
     public class CollectionViewModel <T>: BaseViewModel<T,int>
     {
@@ -27,14 +27,14 @@ namespace JSONPlaceholder.ViewModels
         public CollectionViewModel()
         {
             Title = "Browse";
-            //Items = new RangeObservableCollection<T>();
-            //BindingBase.EnableCollectionSynchronization(Items, null, ObservableCollectionCallback);
+            Items = new RangeObservableCollection<T>();
+            BindingBase.EnableCollectionSynchronization(Items, null, ObservableCollectionCallback);
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             AddItemCommand = new AsyncCommand<T>(async (item) => await ExecuteAddItemCommand(item));
             
         }
 
-        protected void ObservableCollectionCallback(IEnumerable collection, object context, Action accessMethod, bool writeAccess)
+        void ObservableCollectionCallback(IEnumerable collection, object context, Action accessMethod, bool writeAccess)
         {
             lock (collection)
             {

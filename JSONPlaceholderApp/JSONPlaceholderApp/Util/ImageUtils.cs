@@ -3,7 +3,7 @@ using System.Drawing;
 using System.IO;
 //using Xamarin.Forms;
 
-namespace JSONPlaceholder.Util
+namespace JSONPlaceholderApp.Util
 {
     public static class ImageUtils
     {

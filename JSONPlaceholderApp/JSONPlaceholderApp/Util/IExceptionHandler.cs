@@ -1,5 +1,5 @@
 ﻿using System;
-namespace JSONPlaceholder.Util
+namespace JSONPlaceholderApp.Util
 {
     public class IExceptionHandler
     {

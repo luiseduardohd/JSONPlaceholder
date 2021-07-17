@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using SQLite;
 
-namespace JSONPlaceholder.Entities
+namespace JSONPlaceholderApp.Entities
 {
     public class Entity<T>
     {

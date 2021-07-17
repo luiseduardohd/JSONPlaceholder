@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 
-namespace JSONPlaceholder.Entities
+namespace JSONPlaceholderApp.Entities
 {
     public class Comment : Entity<int>
     {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using JSONPlaceholder.Entities;
-using JSONPlaceholder.Util;
+using JSONPlaceholderApp.Entities;
+using JSONPlaceholderApp.Util;
 using SQLite;
 
-namespace JSONPlaceholder.Database
+namespace JSONPlaceholderApp.Database
 {
     public class JSONPlaceholderSqlite 
     {

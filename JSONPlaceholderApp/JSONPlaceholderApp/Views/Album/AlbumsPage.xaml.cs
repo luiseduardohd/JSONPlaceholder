@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using JSONPlaceholder.Entities;
-using JSONPlaceholder.Views;
-using JSONPlaceholder.ViewModels;
+using JSONPlaceholderApp.Entities;
+using JSONPlaceholderApp.Views;
+using JSONPlaceholderApp.ViewModels;
 
-namespace JSONPlaceholder.Views
+namespace JSONPlaceholderApp.Views
 {
     [DesignTimeVisible(false)]
     public partial class AlbumsPage : ContentPage
@@ -26,7 +26,58 @@ namespace JSONPlaceholder.Views
 
         public AlbumsPage(AlbumsViewModel albumsViewModel)
         {
-            InitializeComponent();
+            //InitializeComponent();
+
+            // Empieza Editar
+
+            var albumsDataTemplate = new DataTemplate(() =>
+            {
+                var label = new Label()
+                {
+                    //Text="Text",
+                    LineBreakMode = LineBreakMode.NoWrap,
+                    FontSize = 16
+                };
+                label.SetBinding(Label.TextProperty, "Title");
+                
+                var stackLayout = new StackLayout()
+                {
+                    Children =
+                    {
+                        label,
+                    }
+                };
+                
+                var tapGestureRecognizer = new TapGestureRecognizer()
+                {
+                    NumberOfTapsRequired = 1,
+                };
+                tapGestureRecognizer.Tapped += OnItemSelected;
+                //tapGestureRecognizer.SetBinding(TapGestureRecognizer.CommandProperty, "OnItemSelected");
+                stackLayout.GestureRecognizers.Add(tapGestureRecognizer);
+                return stackLayout ;
+            });
+            
+            var collectionView = new CollectionView()
+            {
+                ItemTemplate = albumsDataTemplate
+            };
+            collectionView.SetBinding(CollectionView.ItemsSourceProperty, "Items");
+
+            var refreshView = new RefreshView()
+            {
+                Content = collectionView
+            };
+            Binding binding = new Binding();
+            binding.Path = "IsBusy";
+            binding.Mode = BindingMode.TwoWay;
+            refreshView.SetBinding(RefreshView.IsRefreshingProperty, binding);
+            refreshView.SetBinding(RefreshView.CommandProperty, "LoadItemsCommand");
+            this.Content = refreshView;
+
+
+            // Termina de editar
+
             BindingContext = this.viewModel = albumsViewModel;
         }
 

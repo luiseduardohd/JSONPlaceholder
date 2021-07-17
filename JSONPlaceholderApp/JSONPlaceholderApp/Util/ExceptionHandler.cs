@@ -1,5 +1,5 @@
 ﻿using System;
-namespace JSONPlaceholder.Util
+namespace JSONPlaceholderApp.Util
 {
     using System.Diagnostics;
     using System.Runtime;

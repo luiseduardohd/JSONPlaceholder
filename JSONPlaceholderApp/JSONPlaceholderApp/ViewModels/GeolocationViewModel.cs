@@ -1,7 +1,7 @@
 ﻿using System;
-using JSONPlaceholder.Entities;
+using JSONPlaceholderApp.Entities;
 
-namespace JSONPlaceholder.ViewModels
+namespace JSONPlaceholderApp.ViewModels
 {
     public class GeolocationViewModel : BaseViewModel<Geolocation>
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace JSONPlaceholder.Util
+namespace JSONPlaceholderApp.Util
 {
     //To be used on next commits
     public static class AsyncErrorHandler

@@ -3,10 +3,11 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using JSONPlaceholder.Entities;
-using JSONPlaceholder.ViewModels;
+using JSONPlaceholderApp.Entities;
+using JSONPlaceholderApp.ViewModels;
+using FFImageLoading.Forms;
 
-namespace JSONPlaceholder.Views
+namespace JSONPlaceholderApp.Views
 {
     [DesignTimeVisible(false)]
     public partial class PhotoPage : ContentPage
@@ -15,7 +16,46 @@ namespace JSONPlaceholder.Views
 
         public PhotoPage(PhotoViewModel viewModel)
         {
-            InitializeComponent();
+            //InitializeComponent();
+
+            // Comienza a editar
+
+            var lblTitlePhoto =
+                new Label()
+                {
+                    FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+                };
+            lblTitlePhoto.SetBinding(Label.TextProperty, "Item.Title");
+
+            var cachedImage =
+                        new CachedImage()
+                        {
+                            HorizontalOptions = LayoutOptions.Center,
+                            VerticalOptions = LayoutOptions.Center,
+                            WidthRequest = 200,
+                            HeightRequest = 200,
+                            DownsampleToViewSize = true,
+                        };
+            cachedImage.SetBinding(CachedImage.SourceProperty, "Item.Url");
+
+            this.Content = new ScrollView()
+            {
+                Content = new StackLayout()
+                {
+                    Spacing = 20,
+                    Padding = 15,
+                    Children =
+                    {
+                        lblTitlePhoto,
+                        cachedImage
+                    }
+                }
+
+            };
+
+
+
+            // Termino de editar
 
             BindingContext = this.viewModel = viewModel;
         }
@@ -32,6 +72,7 @@ namespace JSONPlaceholder.Views
             };
 
             viewModel = new PhotoViewModel(item);
+           
             BindingContext = viewModel;
         }
     }

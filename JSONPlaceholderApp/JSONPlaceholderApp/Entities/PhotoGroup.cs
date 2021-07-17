@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using JSONPlaceholder.Util;
+using JSONPlaceholderApp.Util;
 
-namespace JSONPlaceholder.Entities
+namespace JSONPlaceholderApp.Entities
 {
     public class PhotoGroup
         : RangeObservableCollection<Photo>

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+
 using Foundation;
 using UIKit;
 
-namespace JSONPlaceholder.iOS
+namespace JSONPlaceholderApp.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
     // User Interface of the application, as well as listening (and optionally responding) to 
@@ -22,16 +22,8 @@ namespace JSONPlaceholder.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            Xamarin.Calabash.Start();
             global::Xamarin.Forms.Forms.Init();
-            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
-            var formsApp = new App();
-            //await formsApp.InitializeAsync();
-            //_ = Task.Run(async () =>
-            //{
-            //    await formsApp.InitializeAsync();
-            //});
-            LoadApplication(formsApp);
+            LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
         }

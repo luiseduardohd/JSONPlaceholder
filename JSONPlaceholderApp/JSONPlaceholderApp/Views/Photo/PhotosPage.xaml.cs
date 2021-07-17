@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using JSONPlaceholder.Entities;
-using JSONPlaceholder.Views;
-using JSONPlaceholder.ViewModels;
+using JSONPlaceholderApp.Entities;
+using JSONPlaceholderApp.Views;
+using JSONPlaceholderApp.ViewModels;
+using FFImageLoading.Forms;
 
-namespace JSONPlaceholder.Views
+namespace JSONPlaceholderApp.Views
 {
     [DesignTimeVisible(false)]
     public partial class PhotosPage : ContentPage
@@ -26,7 +27,72 @@ namespace JSONPlaceholder.Views
 
         public PhotosPage(PhotosViewModel photosViewModel):base()
         {
-            InitializeComponent();
+            //InitializeComponent();
+
+            //
+
+            var photosDataTemplate = new DataTemplate(() =>
+            {
+                var lblPhotos = new Label()
+                {
+                    //Text="Text",
+                    LineBreakMode = LineBreakMode.NoWrap,
+                    FontSize = 16
+                };
+                lblPhotos.SetBinding(Label.TextProperty, "Title");
+
+              
+
+                var cachedImage =
+                        new CachedImage()
+                        {
+                            HorizontalOptions = LayoutOptions.Center,
+                            VerticalOptions = LayoutOptions.Center,
+                            WidthRequest = 100,
+                            HeightRequest = 100,
+                            DownsampleToViewSize = true,
+                        };
+                cachedImage.SetBinding(CachedImage.SourceProperty, "ThumbnailUrl");
+
+                var stackLayout = new StackLayout()
+                {
+                    Children =
+                    {
+                        cachedImage,
+                        lblPhotos,
+
+                    }
+                };
+
+                var tapGestureRecognizer = new TapGestureRecognizer()
+                {
+                    NumberOfTapsRequired = 1,
+                };
+                tapGestureRecognizer.Tapped += OnItemSelected;
+                //tapGestureRecognizer.SetBinding(TapGestureRecognizer.CommandProperty, "OnItemSelected");
+                stackLayout.GestureRecognizers.Add(tapGestureRecognizer);
+                return stackLayout;
+            });
+
+            var collectionView = new CollectionView()
+            {
+                ItemTemplate = photosDataTemplate
+            };
+            collectionView.SetBinding(CollectionView.ItemsSourceProperty, "Items");
+
+
+            var refreshView = new RefreshView()
+            {
+                Content = collectionView
+            };
+            Binding binding = new Binding();
+            binding.Path = "IsBusy";
+            binding.Mode = BindingMode.TwoWay;
+            refreshView.SetBinding(RefreshView.IsRefreshingProperty, binding);
+            refreshView.SetBinding(RefreshView.CommandProperty, "LoadItemsCommand");
+            this.Content = refreshView;
+
+            //
             BindingContext = viewModel = photosViewModel;
         }
 

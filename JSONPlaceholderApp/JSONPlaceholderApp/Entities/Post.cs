@@ -7,7 +7,7 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace JSONPlaceholder.Entities
+namespace JSONPlaceholderApp.Entities
 {
     public class Post : Entity<int>
     {

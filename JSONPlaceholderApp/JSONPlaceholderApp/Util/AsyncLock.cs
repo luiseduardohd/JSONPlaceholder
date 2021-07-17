@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace JSONPlaceholder.Util
+namespace JSONPlaceholderApp.Util
 {
     public class AsyncLock : IDisposable
     {

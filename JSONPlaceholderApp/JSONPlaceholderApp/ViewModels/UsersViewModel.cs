@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using JSONPlaceholder.Entities;
+using JSONPlaceholderApp.Entities;
 using Xamarin.Forms;
 
-namespace JSONPlaceholder.ViewModels
+namespace JSONPlaceholderApp.ViewModels
 {
     public class UsersViewModel : CollectionViewModel<User>
     {
@@ -13,15 +13,15 @@ namespace JSONPlaceholder.ViewModels
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
-
         protected override async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
 
             try
             {
-                Items = await App.jsonPlaceholder.GetUsersAsync();
-                BindingBase.EnableCollectionSynchronization(Items, null, ObservableCollectionCallback);
+                Items.Clear();
+                var items = await App.jsonPlaceholder.GetUsersAsync();
+                Items.AddRange(items);
             }
             catch (Exception ex)
             {

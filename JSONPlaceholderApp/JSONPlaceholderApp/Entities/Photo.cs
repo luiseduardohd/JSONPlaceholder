@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using JSONPlaceholder.Util;
+using JSONPlaceholderApp.Util;
 using Newtonsoft.Json;
 using SQLite;
 
-namespace JSONPlaceholder.Entities
+namespace JSONPlaceholderApp.Entities
 {
     public class Photo : Entity<int>
     {

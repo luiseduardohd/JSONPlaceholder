@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace JSONPlaceholder.Services
+namespace JSONPlaceholderApp.Services
 {
     public interface IDataStore<T,I>
     {

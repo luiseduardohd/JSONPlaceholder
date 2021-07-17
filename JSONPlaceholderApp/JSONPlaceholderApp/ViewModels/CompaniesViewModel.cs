@@ -1,8 +1,7 @@
 ﻿using System;
-using JSONPlaceholder.Entities;
-using JSONPlaceholder.Util;
+using JSONPlaceholderApp.Entities;
 
-namespace JSONPlaceholder.ViewModels
+namespace JSONPlaceholderApp.ViewModels
 {
     public class CompaniesViewModel : CollectionViewModel<Company>
     {

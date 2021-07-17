@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using JSONPlaceholder.Entities;
+using JSONPlaceholderApp.Entities;
 
 
-namespace JSONPlaceholder.Services
+namespace JSONPlaceholderApp.Services
 {
     public class DataStore<T,I> : IDataStore<T,I> where T : Entity<I> 
     {

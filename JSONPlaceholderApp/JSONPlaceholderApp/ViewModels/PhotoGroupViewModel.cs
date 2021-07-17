@@ -4,11 +4,11 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using JSONPlaceholder.Entities;
-using JSONPlaceholder.Util;
+using JSONPlaceholderApp.Entities;
+using JSONPlaceholderApp.Util;
 using Xamarin.Forms;
 
-namespace JSONPlaceholder.ViewModels
+namespace JSONPlaceholderApp.ViewModels
 {
     public class PhotoGroupViewModel : CollectionViewModel<PhotoGroup>
     {
@@ -16,7 +16,7 @@ namespace JSONPlaceholder.ViewModels
         public Command RefreshItemsCommand { get; set; }
         
 
-        private RangeObservableCollection<Album> Groups =  new RangeObservableCollection<Album>();
+        private ObservableCollection<Album> Groups =  new ObservableCollection<Album>();
         private int CurrentGroup = -1;// -1 no current group
 
         public int RemainingItemsThreshold
@@ -38,19 +38,19 @@ namespace JSONPlaceholder.ViewModels
             });
         }
 
-        async Task<RangeObservableCollection<Album>> GetGroups()
+        async Task<ObservableCollection<Album>> GetGroups()
         {
             var albums = await App.jsonPlaceholder.GetAlbumsAsync();
             return albums;
         }
-        bool CanLoadNextGroup(int currentGroup, RangeObservableCollection<Album> groups)
+        bool CanLoadNextGroup(int currentGroup, ObservableCollection<Album> groups)
         {
             if (currentGroup + 1 < groups.Count)
                 return true;
             else
                 return false;
         }
-        async Task TryLoadNextGroup(int currentGroup, RangeObservableCollection<Album> groups, RangeObservableCollection<PhotoGroup> Items)
+        async Task TryLoadNextGroup(int currentGroup, ObservableCollection<Album> groups, RangeObservableCollection<PhotoGroup> Items)
         {
             if( CanLoadNextGroup( currentGroup,  groups) )
             {

@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using JSONPlaceholder.Entities;
-using JSONPlaceholder.Util;
+using JSONPlaceholderApp.Entities;
 using Xamarin.Forms;
 
-namespace JSONPlaceholder.ViewModels
+namespace JSONPlaceholderApp.ViewModels
 {
     public class PhotosViewModel :  CollectionViewModel<Photo>
     {
-        private Func<Task<RangeObservableCollection<Photo>>> GetItems;
+        private Func<Task<ObservableCollection<Photo>>> GetItems;
 
         public PhotosViewModel()
             : this(App.jsonPlaceholder.GetPhotosAsync)
         {
         }
 
-        public PhotosViewModel(Func<Task<RangeObservableCollection<Photo>>> getItems) : base()
+        public PhotosViewModel(Func<Task<ObservableCollection<Photo>>> getItems) : base()
         {
             this.GetItems = getItems;
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
@@ -30,8 +29,9 @@ namespace JSONPlaceholder.ViewModels
 
             try
             {
-                Items = await GetItems();
-                BindingBase.EnableCollectionSynchronization(Items, null, ObservableCollectionCallback);
+                Items.Clear();
+                var items = await GetItems();
+                Items.AddRange(items);
             }
             catch (Exception ex)
             {

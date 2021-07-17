@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace JSONPlaceholder.iOS
+namespace JSONPlaceholderApp.iOS
 {
     public class Application
     {

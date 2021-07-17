@@ -2,18 +2,17 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using JSONPlaceholder.Entities;
-using JSONPlaceholder.Util;
+using JSONPlaceholderApp.Entities;
 using Nito.AsyncEx;
 using Xamarin.Forms;
 
-namespace JSONPlaceholder.ViewModels
+namespace JSONPlaceholderApp.ViewModels
 {
     public class AlbumsViewModel : CollectionViewModel<Album>
     {
         //private AsyncLazy<ObservableCollection<Album>> asyncAlbums;
 
-        private Func<Task<RangeObservableCollection<Album>>> GetItems;
+        private Func<Task<ObservableCollection<Album>>> GetItems;
 
         //No parameter load all.
         public AlbumsViewModel()
@@ -29,7 +28,7 @@ namespace JSONPlaceholder.ViewModels
         }
 
         //public AlbumsViewModel(AsyncLazy<ObservableCollection<Album>> asyncAlbums):base()
-        public AlbumsViewModel(Func<Task<RangeObservableCollection<Album>>> GetItems) : base()
+        public AlbumsViewModel(Func<Task<ObservableCollection<Album>>> GetItems) : base()
         {
             this.GetItems = GetItems;
 
@@ -44,8 +43,9 @@ namespace JSONPlaceholder.ViewModels
 
             try
             {
-                Items = await GetItems();
-                BindingBase.EnableCollectionSynchronization(Items, null, ObservableCollectionCallback);
+                Items.Clear();
+                var items = await GetItems();
+                Items.AddRange(items);
             }
             catch (Exception ex)
             {

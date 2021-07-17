@@ -5,7 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using Xamarin.Forms;
 
-namespace JSONPlaceholder.Util
+namespace JSONPlaceholderApp.Util
 {
     public class RangeObservableCollection<T> : ObservableCollection<T> 
     {

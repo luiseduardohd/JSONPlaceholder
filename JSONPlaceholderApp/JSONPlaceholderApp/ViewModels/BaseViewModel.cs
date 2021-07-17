@@ -5,10 +5,10 @@ using System.Runtime.CompilerServices;
 
 using Xamarin.Forms;
 
-using JSONPlaceholder.Entities;
-using JSONPlaceholder.Services;
+using JSONPlaceholderApp.Entities;
+using JSONPlaceholderApp.Services;
 
-namespace JSONPlaceholder.ViewModels
+namespace JSONPlaceholderApp.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

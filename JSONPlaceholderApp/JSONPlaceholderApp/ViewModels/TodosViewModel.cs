@@ -2,18 +2,17 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using JSONPlaceholder.Entities;
-using JSONPlaceholder.Util;
+using JSONPlaceholderApp.Entities;
 using Nito.AsyncEx;
 using Xamarin.Forms;
 
-namespace JSONPlaceholder.ViewModels
+namespace JSONPlaceholderApp.ViewModels
 {
     public class TodosViewModel : CollectionViewModel<Todo>
     {
         //private AsyncLazy<ObservableCollection<Todo>> asyncTodos;
 
-        private Func<Task<RangeObservableCollection<Todo>>> GetItems;
+        private Func<Task<ObservableCollection<Todo>>> GetItems;
 
         public TodosViewModel()
             : this(App.jsonPlaceholder.GetTodosAsync)
@@ -28,7 +27,7 @@ namespace JSONPlaceholder.ViewModels
         }
 
         //public TodosViewModel(AsyncLazy<ObservableCollection<Todo>> asyncTodos):base()
-        public TodosViewModel(Func<Task<RangeObservableCollection<Todo>>> GetItems) : base()
+        public TodosViewModel(Func<Task<ObservableCollection<Todo>>> GetItems) : base()
         {
             this.GetItems = GetItems;
             LoadItemsCommand = new Command(
@@ -42,8 +41,9 @@ namespace JSONPlaceholder.ViewModels
 
             try
             {
-                Items = await GetItems();
-                BindingBase.EnableCollectionSynchronization(Items, null, ObservableCollectionCallback);
+                Items.Clear();
+                var items = await GetItems();
+                Items.AddRange(items);
             }
             catch (Exception ex)
             {
