@@ -17,6 +17,8 @@ using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms.Internals;
 using System.Diagnostics;
+using Acr.UserDialogs;
+using System.Net.Http;
 
 namespace JSONPlaceholderApp
 {
@@ -33,6 +35,24 @@ namespace JSONPlaceholderApp
                 {
                     var dbFileName = Globals.DBCompleteFileExtension;
                     var JSONPlaceholderSqlite = new JSONPlaceholderSqlite(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), dbFileName));
+                    /*
+                    var IJSONPlaceholder = RestService.For<IJSONPlaceholder>(new HttpClient
+                    {
+                        BaseAddress = new Uri(Globals.JSONPlaceHolderUrl),
+                        Timeout = TimeSpan.FromSeconds(10)
+                    }, new RefitSettings
+                    {
+                        ExceptionFactory = httpResponse =>
+                        {
+                            if (httpResponse.IsSuccessStatusCode)
+                                return Task.FromResult <Exception>(null);
+                            //WriteLine("My custom error event intercept => " + httpResponse.ToString());
+                            var httpResponseMessage = httpResponse.ToString();
+                            UserDialogs.Instance.Alert(httpResponseMessage);
+                            return Task.FromResult(new Exception(httpResponseMessage));
+                        }
+                    });
+                    */
                     var IJSONPlaceholder = RestService.For<IJSONPlaceholder>(Globals.JSONPlaceHolderUrl);
 
                     _jsonPlaceholder = new Model.JSONPlaceholder(JSONPlaceholderSqlite, IJSONPlaceholder);
@@ -68,23 +88,23 @@ namespace JSONPlaceholderApp
                         Property =  Button.TextColorProperty,
                         Value = "White"
                     },
-                    /*
-                    new Setter()
-                    {
-                        Property = Button.Prop  BindableProperty.Create( "VisualStateManager.VisualStateGroups",typeof(string), typeof(NavigationPage),
-                        Value = new VisualStateGroupList(){ 
-                            new VisualStateGroup()
-                            {
-                                Name = "CommonStates",
-                                States =
-                                {
-                                    ButtonStyle.NormalState,
-                                    ButtonStyle.DisabledState,
-                                }
-                            }
-                        },
-                    }
-                    */
+                    
+                    //new Setter()
+                    //{
+                    //    Property = Button.Prop  BindableProperty.Create( "VisualStateManager.VisualStateGroups",typeof(string), typeof(NavigationPage),
+                    //    Value = new VisualStateGroupList(){ 
+                    //        new VisualStateGroup()
+                    //        {
+                    //            Name = "CommonStates",
+                    //            States =
+                    //            {
+                    //                ButtonStyle.NormalState,
+                    //                ButtonStyle.DisabledState,
+                    //            }
+                    //        }
+                    //    },
+                    //}
+                    
                 }
             };
             //style1.
@@ -140,5 +160,8 @@ namespace JSONPlaceholderApp
         protected override void OnResume()
         {
         }
+
+        
+
     }
 }

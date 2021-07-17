@@ -19,8 +19,10 @@ namespace JSONPlaceholderApp.WebApplication
             AsyncConnection.CreateTableAsync<Post>().Wait();
             AsyncConnection.CreateTableAsync<Photo>().Wait();
             AsyncConnection.CreateTableAsync<Address>().Wait();
+            AsyncConnection.CreateTableAsync<User>().Wait();
         }
 
+        /*
         public Task<List<Test>> GetTestsAsync()
         {
             return AsyncConnection.Table<Test>().ToListAsync();
@@ -65,5 +67,12 @@ namespace JSONPlaceholderApp.WebApplication
         {
             return AsyncConnection.InsertAsync(newAddress);
         }
+
+        */
     }
 }
+
+
+
+
+

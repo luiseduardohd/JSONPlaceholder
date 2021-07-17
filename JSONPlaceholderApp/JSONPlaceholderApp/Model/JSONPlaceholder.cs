@@ -12,6 +12,8 @@ using JSONPlaceholderApp.Entities;
 using Refit;
 using SQLite;
 using Xamarin.Essentials;
+using Acr.UserDialogs;
+using System.Threading;
 
 namespace JSONPlaceholderApp.Model
 {
@@ -152,7 +154,22 @@ namespace JSONPlaceholderApp.Model
 
             var rangeObservableCollection = await Cacheable<User>.GetItemAsync(
                 async () => await JSONPlaceholderSqlite.GetUsersAsync(),
-                async () => await JSONPlaceholderWebService.GetUsersAsync(),
+                async () =>
+                {
+                    try
+                    {
+                        CancellationTokenSource tokenSource = new CancellationTokenSource();
+                        tokenSource.CancelAfter(5000); // 10000 ms
+                        CancellationToken token = tokenSource.Token;
+                        return await JSONPlaceholderWebService.GetUsersAsync(token);
+                    }
+                    catch(Exception exception)
+                    {
+                        UserDialogs.Instance.Alert(exception.Message);
+                        return new List<User>();
+                    }
+                }
+                ,
                 JSONPlaceholderSqlite.SQLiteAsyncConnection);
 
             return rangeObservableCollection;

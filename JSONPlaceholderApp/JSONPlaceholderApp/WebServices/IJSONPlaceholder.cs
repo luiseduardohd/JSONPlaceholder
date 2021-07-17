@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using JSONPlaceholderApp.Entities;
 using Refit;
@@ -53,6 +54,8 @@ namespace JSONPlaceholderApp.WebServices
 
         [Get("/users/")]
         Task<List<User>> GetUsersAsync();
+        [Get("/users/")]
+        Task<List<User>> GetUsersAsync(CancellationToken cancellationToken);
 
         [Get("/user/{userId}")]
         Task<Photo> GetUserAsync(int userId);

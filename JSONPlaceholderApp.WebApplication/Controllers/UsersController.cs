@@ -1,10 +1,16 @@
 ﻿using JSONPlaceholderApp.Entities;
+//using JSONPlaceholderApp.ViewModels;
+//using JSONPlaceholderApp.Views;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+//using Xamarin.Forms;
 
 namespace JSONPlaceholderApp.WebApplication.Controllers
 {
@@ -12,10 +18,12 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
     [Route("users")]
     public class UsersController : ControllerBase
     {
+        /*
         private static readonly string[] Texts = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
+        */
         
         private readonly ILogger<UsersController> _logger;
 
@@ -81,5 +89,6 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
             //_UserRepository.Delete(id);
             await Database.AsyncConnection.DeleteAsync<User>(id);
         }
+
     }
 }
