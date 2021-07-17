@@ -8,6 +8,7 @@ namespace JSONPlaceholderApp.Entities
 {
     public class Album : Entity<int>
     {
+
         [ForeignKey(nameof(User))]
         [JsonProperty("userId")]
         public int UserId { get; set; }

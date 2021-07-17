@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,7 +25,10 @@ namespace JSONPlaceholderApp.WebApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JSONPlaceHolderDatabase.db3");
+            var database = new Database(databasePath);
             services.AddControllers();
+            services.AddSingleton<Database>(database);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

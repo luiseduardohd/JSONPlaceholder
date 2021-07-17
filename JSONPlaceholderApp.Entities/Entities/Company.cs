@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace JSONPlaceholderApp.Entities
 {
-    public class Company : Entity<String>
+    public class Company //: Entity<String>
     {
         [JsonProperty("name")]
         public String Name { get; set; }
