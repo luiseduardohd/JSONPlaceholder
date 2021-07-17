@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\JSONPlaceholderApp.Entities\JSONPlaceholderApp.Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Views\Album\AlbumPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>

@@ -1,4 +1,4 @@
-﻿using JSONPlaceholderApp.WebApplication.Entities;
+﻿using JSONPlaceholderApp.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
