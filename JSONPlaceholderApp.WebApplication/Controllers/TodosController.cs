@@ -19,11 +19,15 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
 
         private readonly ILogger<TodosController> _logger;
 
-        public TodosController(ILogger<TodosController> logger)
+        public Repository Database { get; private set; }
+
+        public TodosController(ILogger<TodosController> logger, Repository database)
         {
             _logger = logger;
+            this.Database = database;
         }
 
+        /*
         [HttpGet]
         public IEnumerable<Todo> Get()
         {
@@ -36,6 +40,43 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
                 Completed = Convert.ToBoolean(rng.Next(0, 1)),
             })
             .ToArray();
+        }
+        */
+
+        [HttpGet]
+        public async Task<List<Todo>> GetAsync()
+        {
+
+            return await Database.AsyncConnection.Table<Todo>().ToListAsync();
+
+        }
+
+
+        [HttpGet("{id}")]
+        public async Task<Todo> GetAsync(long id)
+        {
+            return await Database.AsyncConnection.Table<Todo>().Where((o) => o.Id == id).FirstOrDefaultAsync();
+        }
+
+        [HttpPost]
+        public async Task PostAsync([FromBody] Todo value)
+        {
+            //_TodoRepository.Post(value);
+            await Database.AsyncConnection.InsertAsync(value);
+        }
+
+        [HttpPut("{id}")]
+        public async Task PutAsync(long id, [FromBody] Todo value)
+        {
+            //_TodoRepository.Put(id, value);
+            await Database.AsyncConnection.UpdateAsync(value);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task DeleteAsync(long id)
+        {
+            //_TodoRepository.Delete(id);
+            await Database.AsyncConnection.DeleteAsync<Todo>(id);
         }
     }
 }

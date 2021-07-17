@@ -19,11 +19,16 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
 
         private readonly ILogger<PhotosController> _logger;
 
-        public PhotosController(ILogger<PhotosController> logger)
+        public Repository Database { get; private set; }
+
+        public PhotosController(ILogger<PhotosController> logger, Repository database)
         {
             _logger = logger;
+            this.Database = database;
         }
 
+
+        /*
         [HttpGet]
         public IEnumerable<Photo> Get()
         {
@@ -38,5 +43,43 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
             })
             .ToArray();
         }
+        */
+
+        [HttpGet]
+        public async Task<List<Photo>> GetAsync()
+        {
+
+            return await Database.AsyncConnection.Table<Photo>().ToListAsync();
+
+        }
+
+
+        [HttpGet("{id}")]
+        public async Task<Photo> GetAsync(long id)
+        {
+            return await Database.AsyncConnection.Table<Photo>().Where((o) => o.Id == id).FirstOrDefaultAsync();
+        }
+
+        [HttpPost]
+        public async Task PostAsync([FromBody] Photo value)
+        {
+            //_PhotoRepository.Post(value);
+            await Database.AsyncConnection.InsertAsync(value);
+        }
+
+        [HttpPut("{id}")]
+        public async Task PutAsync(long id, [FromBody] Photo value)
+        {
+            //_PhotoRepository.Put(id, value);
+            await Database.AsyncConnection.UpdateAsync(value);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task DeleteAsync(long id)
+        {
+            //_PhotoRepository.Delete(id);
+            await Database.AsyncConnection.DeleteAsync<Photo>(id);
+        }
+
     }
 }

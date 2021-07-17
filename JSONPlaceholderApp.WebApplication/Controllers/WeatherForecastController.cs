@@ -18,10 +18,16 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
+        //public Repository Database { get; private set; }
+
+        //public WeatherForecastController(ILogger<WeatherForecastController> logger, Repository database)
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
+            //this.Database = database;
         }
+
+        
 
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
@@ -35,5 +41,45 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
             })
             .ToArray();
         }
+
+        /*
+
+        [HttpGet]
+        public async Task<List<WeatherForecast>> GetAsync()
+        {
+
+            return await Database.AsyncConnection.Table<WeatherForecast>().ToListAsync();
+
+        }
+
+        [HttpGet("{id}")]
+        public async Task<WeatherForecast> GetAsync(long id)
+        {
+            return await Database.AsyncConnection.Table<WeatherForecast>().Where((o) => o.Id == id).FirstOrDefaultAsync();
+        }
+
+        [HttpPost]
+        public async Task PostAsync([FromBody] WeatherForecast value)
+        {
+            //_WeatherForecastRepository.Post(value);
+            await Database.AsyncConnection.InsertAsync(value);
+        }
+
+        [HttpPut("{id}")]
+        public async Task PutAsync(long id, [FromBody] WeatherForecast value)
+        {
+            //_WeatherForecastRepository.Put(id, value);
+            await Database.AsyncConnection.UpdateAsync(value);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task DeleteAsync(long id)
+        {
+            //_WeatherForecastRepository.Delete(id);
+            await Database.AsyncConnection.DeleteAsync<WeatherForecast>(id);
+        }
+
+        */
+
     }
 }

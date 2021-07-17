@@ -19,9 +19,9 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
 
         private readonly ILogger<PostsController> _logger;
 
-        public Database Database { get; private set; }
+        public Repository Database { get; private set; }
 
-        public TestsController(ILogger<PostsController> logger, Database database)
+        public TestsController(ILogger<PostsController> logger, Repository database)
         {
             _logger = logger;
             this.Database = database;
@@ -40,8 +40,35 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
             .ToArray();
             */
 
-            return await Database.GetTestsAsync();
+            return await Database.AsyncConnection.Table<Test>().ToListAsync();
 
+        }
+
+        [HttpGet("{id}")]
+        public async Task<Test> GetAsync(long id)
+        {
+            return await Database.AsyncConnection.Table<Test>().Where( (o)=> o.Id == id ).FirstOrDefaultAsync();
+        }
+
+        [HttpPost]
+        public async Task PostAsync([FromBody] Test value)
+        {
+            //_TestRepository.Post(value);
+            await Database.AsyncConnection.InsertAsync(value);
+        }
+
+        [HttpPut("{id}")]
+        public async Task PutAsync(long id, [FromBody] Test value)
+        {
+            //_TestRepository.Put(id, value);
+            await Database.AsyncConnection.UpdateAsync(value);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task DeleteAsync(long id)
+        {
+            //_TestRepository.Delete(id);
+            await Database.AsyncConnection.DeleteAsync<Test>(id);
         }
     }
 }

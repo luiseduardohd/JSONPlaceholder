@@ -19,11 +19,14 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
 
         private readonly ILogger<PostsController> _logger;
 
-        public AlbumsController(ILogger<PostsController> logger)
+        public Repository Database { get; private set; }
+
+        public AlbumsController(ILogger<PostsController> logger, Repository database)
         {
             _logger = logger;
+            this.Database = database;
         }
-
+        /*
         [HttpGet]
         public IEnumerable<Album> Get()
         {
@@ -35,6 +38,43 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
                 Title = Summaries[rng.Next(Summaries.Length)],
             })
             .ToArray();
+        }
+        */
+
+        [HttpGet]
+        public async Task<List<Album>> GetAsync()
+        {
+
+            return await Database.AsyncConnection.Table<Album>().ToListAsync();
+
+        }
+
+
+        [HttpGet("{id}")]
+        public async Task<Album> GetAsync(long id)
+        {
+            return await Database.AsyncConnection.Table<Album>().Where((o) => o.Id == id).FirstOrDefaultAsync();
+        }
+
+        [HttpPost]
+        public async Task PostAsync([FromBody] Album value)
+        {
+            //_AlbumRepository.Post(value);
+            await Database.AsyncConnection.InsertAsync(value);
+        }
+
+        [HttpPut("{id}")]
+        public async Task PutAsync(long id, [FromBody] Album value)
+        {
+            //_AlbumRepository.Put(id, value);
+            await Database.AsyncConnection.UpdateAsync(value);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task DeleteAsync(long id)
+        {
+            //_AlbumRepository.Delete(id);
+            await Database.AsyncConnection.DeleteAsync<Album>(id);
         }
     }
 }

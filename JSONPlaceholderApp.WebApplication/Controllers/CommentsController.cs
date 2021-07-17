@@ -19,10 +19,15 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
 
         private readonly ILogger<CommentsController> _logger;
 
-        public CommentsController(ILogger<CommentsController> logger)
+        public Repository Database { get; private set; }
+
+        public CommentsController(ILogger<CommentsController> logger, Repository database)
         {
             _logger = logger;
+            this.Database = database;
         }
+
+        /*
 
         [HttpGet]
         public IEnumerable<Comment> Get()
@@ -37,6 +42,44 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
                 Body = Summaries[rng.Next(Summaries.Length)],
             })
             .ToArray();
+        }
+
+        */
+
+        [HttpGet]
+        public async Task<List<Comment>> GetAsync()
+        {
+
+            return await Database.AsyncConnection.Table<Comment>().ToListAsync();
+
+        }
+
+
+        [HttpGet("{id}")]
+        public async Task<Comment> GetAsync(long id)
+        {
+            return await Database.AsyncConnection.Table<Comment>().Where((o) => o.Id == id).FirstOrDefaultAsync();
+        }
+
+        [HttpPost]
+        public async Task PostAsync([FromBody] Comment value)
+        {
+            //_CommentRepository.Post(value);
+            await Database.AsyncConnection.InsertAsync(value);
+        }
+
+        [HttpPut("{id}")]
+        public async Task PutAsync(long id, [FromBody] Comment value)
+        {
+            //_CommentRepository.Put(id, value);
+            await Database.AsyncConnection.UpdateAsync(value);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task DeleteAsync(long id)
+        {
+            //_CommentRepository.Delete(id);
+            await Database.AsyncConnection.DeleteAsync<Comment>(id);
         }
     }
 }

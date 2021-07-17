@@ -19,11 +19,14 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
         
         private readonly ILogger<UsersController> _logger;
 
-        public UsersController(ILogger<UsersController> logger)
+        public Repository Database { get; private set; }
+
+        public UsersController(ILogger<UsersController> logger, Repository database)
         {
             _logger = logger;
+            this.Database = database;
         }
-
+        /*
         [HttpGet]
         public IEnumerable<User> Get()
         {
@@ -40,6 +43,43 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
                 Company = new Company(),
             })
             .ToArray();
+        }
+        */
+
+        [HttpGet]
+        public async Task<List<User>> GetAsync()
+        {
+ 
+            return await Database.AsyncConnection.Table<User>().ToListAsync();
+
+        }
+
+
+        [HttpGet("{id}")]
+        public async Task<User> GetAsync(long id)
+        {
+            return await Database.AsyncConnection.Table<User>().Where((o) => o.Id == id).FirstOrDefaultAsync();
+        }
+
+        [HttpPost]
+        public async Task PostAsync([FromBody] User value)
+        {
+            //_UserRepository.Post(value);
+            await Database.AsyncConnection.InsertAsync(value);
+        }
+
+        [HttpPut("{id}")]
+        public async Task PutAsync(long id, [FromBody] User value)
+        {
+            //_UserRepository.Put(id, value);
+            await Database.AsyncConnection.UpdateAsync(value);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task DeleteAsync(long id)
+        {
+            //_UserRepository.Delete(id);
+            await Database.AsyncConnection.DeleteAsync<User>(id);
         }
     }
 }

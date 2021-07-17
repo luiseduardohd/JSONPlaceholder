@@ -26,9 +26,9 @@ namespace JSONPlaceholderApp.WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JSONPlaceHolderDatabase.db3");
-            var database = new Database(databasePath);
+            var database = new Repository(databasePath);
             services.AddControllers();
-            services.AddSingleton<Database>(database);
+            services.AddSingleton<Repository>(database);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

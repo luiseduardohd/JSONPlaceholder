@@ -19,11 +19,15 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
 
         private readonly ILogger<AddressesController> _logger;
 
-        public AddressesController(ILogger<AddressesController> logger)
+        public Repository Database { get; private set; }
+
+        public AddressesController(ILogger<AddressesController> logger, Repository database)
         {
             _logger = logger;
+            this.Database = database;
         }
 
+        /*
         [HttpGet]
         public IEnumerable<Address> Get()
         {
@@ -41,5 +45,44 @@ namespace JSONPlaceholderApp.WebApplication.Controllers
             })
             .ToArray();
         }
+        */
+
+        [HttpGet]
+        public async Task<List<Address>> GetAsync()
+        {
+
+            return await Database.AsyncConnection.Table<Address>().ToListAsync();
+
+        }
+
+        /*
+        [HttpGet("{id}")]
+        public async Task<Address> GetAsync(long id)
+        {
+            return await Database.AsyncConnection.Table<Address>().Where((o) => o.Id == id).FirstOrDefaultAsync();
+        }
+
+        [HttpPost]
+        public async Task PostAsync([FromBody] Address value)
+        {
+            //_AddressRepository.Post(value);
+            await Database.AsyncConnection.InsertAsync(value);
+        }
+
+        [HttpPut("{id}")]
+        public async Task PutAsync(long id, [FromBody] Address value)
+        {
+            //_AddressRepository.Put(id, value);
+            await Database.AsyncConnection.UpdateAsync(value);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task DeleteAsync(long id)
+        {
+            //_AddressRepository.Delete(id);
+            await Database.AsyncConnection.DeleteAsync<Address>(id);
+        }
+
+        */
     }
 }
