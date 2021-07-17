@@ -9,37 +9,31 @@ using JSONPlaceholderApp.ViewModels;
 namespace JSONPlaceholderApp.Views
 {
     [DesignTimeVisible(false)]
-    public partial class CommentPage : ContentPage
+    public partial class TodoPage : ContentPage
     {
-        CommentViewModel viewModel;
+        TodoViewModel viewModel;
 
-        public CommentPage(CommentViewModel viewModel)
+        public TodoPage(TodoViewModel viewModel)
         {
             //InitializeComponent();
 
-            // EMpiezo a editar
+            // 
 
-            var lblNameComment =
+            this.Title = "ToDo";
+
+            var lblTitleTodo =
                 new Label()
                 {
                     FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
                 };
-            lblNameComment.SetBinding(Label.TextProperty, "Item.Name");
+            lblTitleTodo.SetBinding(Label.TextProperty, "Item.Title");
 
-            var lblEmailComment =
+            var lblCompleted =
                 new Label()
                 {
                     FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
                 };
-            lblEmailComment.SetBinding(Label.TextProperty, "Item.Email");
-
-            var lblBodyComment =
-                new Label()
-                {
-                    FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
-                };
-            lblBodyComment.SetBinding(Label.TextProperty, "Item.Body");
-
+            lblCompleted.SetBinding(Label.TextProperty, "Item.Completed");
 
             this.Content = new ScrollView()
             {
@@ -51,30 +45,24 @@ namespace JSONPlaceholderApp.Views
                     {
                         new Label()
                         {
-                            Text = "Name:",
+                            Text = "Title:",
                             FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                         },
-                        lblNameComment,
+                        lblTitleTodo,
 
                         new Label()
                         {
-                            Text = "Email:",
+                            Text = "Completed:",
                             FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                         },
-                        lblEmailComment,
-
-                        new Label()
-                        {
-                            Text = "Body:",
-                            FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
-                        },
-                        lblBodyComment,
+                        lblCompleted,
 
                     }
                 }
 
             };
 
+            // 
 
             BindingContext = this.viewModel = viewModel;
         }

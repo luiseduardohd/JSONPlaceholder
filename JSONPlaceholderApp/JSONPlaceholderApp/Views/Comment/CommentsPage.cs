@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
 using JSONPlaceholderApp.Entities;
 using JSONPlaceholderApp.Views;
 using JSONPlaceholderApp.ViewModels;
@@ -14,29 +13,40 @@ using JSONPlaceholderApp.ViewModels;
 namespace JSONPlaceholderApp.Views
 {
     [DesignTimeVisible(false)]
-    public partial class PostsPage : ContentPage
+    public partial class CommentsPage : ContentPage
     {
-        PostsViewModel viewModel;
-        //private PostsViewModel postsViewModel;
+        CommentsViewModel viewModel;
+        //private CommentsViewModel commentsViewModel;
 
-        public PostsPage():this(new PostsViewModel())
+        public CommentsPage()
+            :this(new CommentsViewModel())
         {
         }
 
-        public PostsPage(PostsViewModel postsViewModel)
+        public CommentsPage(CommentsViewModel commentsViewModel)
         {
             //InitializeComponent();
 
-            // Empiezo a editar
+            // 
 
-            var postsDataTemplate = new DataTemplate(() =>
+            this.Title = "Comments";
+
+            var commentsDataTemplate = new DataTemplate(() =>
             {
-                var lblTitle = new Label()
+                var lblName = new Label()
                 {
                     LineBreakMode = LineBreakMode.NoWrap,
                     FontSize = 16
                 };
-                lblTitle.SetBinding(Label.TextProperty, "Title");
+                lblName.SetBinding(Label.TextProperty, "Name");
+
+
+                var lblEmail = new Label()
+                {
+                    LineBreakMode = LineBreakMode.NoWrap,
+                    FontSize = 16
+                };
+                lblEmail.SetBinding(Label.TextProperty, "Email");
 
                 var lblBody = new Label()
                 {
@@ -49,7 +59,8 @@ namespace JSONPlaceholderApp.Views
                 {
                     Children =
                     {
-                        lblTitle,
+                        lblName,
+                        lblEmail,
                         lblBody,
 
                     }
@@ -66,7 +77,7 @@ namespace JSONPlaceholderApp.Views
 
             var collectionView = new CollectionView()
             {
-                ItemTemplate = postsDataTemplate
+                ItemTemplate = commentsDataTemplate
             };
             collectionView.SetBinding(CollectionView.ItemsSourceProperty, "Items");
 
@@ -81,23 +92,23 @@ namespace JSONPlaceholderApp.Views
             refreshView.SetBinding(RefreshView.CommandProperty, "LoadItemsCommand");
             this.Content = refreshView;
 
-            // Termino de editar 
+            //  
 
-            BindingContext = this.viewModel = postsViewModel;
+            BindingContext = this.viewModel = commentsViewModel;
         }
 
         async void OnItemSelected(object sender, EventArgs args)
         {
             var layout = (BindableObject)sender;
-            var Post = (Post)layout.BindingContext;
-            await Navigation.PushAsync(new PostPage(new PostViewModel(Post)));
+            var Comment = (Comment)layout.BindingContext;
+            await Navigation.PushAsync(new CommentPage(new CommentViewModel(Comment)));
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            if (viewModel.Items?.Count == 0)
+            if (viewModel.Items.Count == 0)
                 viewModel.IsBusy = true;
         }
     }

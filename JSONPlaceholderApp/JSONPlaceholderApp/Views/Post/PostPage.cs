@@ -20,7 +20,9 @@ namespace JSONPlaceholderApp.Views
         {
             Debug.WriteLine("Time:" + DateTime.Now);
             //InitializeComponent();
-            
+
+            this.Title = "Post";
+
             var button = new Button()
             {
                 Text = "Comments",

@@ -10,60 +10,45 @@ using Xamarin.Forms.Xaml;
 using JSONPlaceholderApp.Entities;
 using JSONPlaceholderApp.Views;
 using JSONPlaceholderApp.ViewModels;
-using FFImageLoading.Forms;
 
 namespace JSONPlaceholderApp.Views
 {
     [DesignTimeVisible(false)]
-    public partial class PhotosPage : ContentPage
+    public partial class AlbumsPage : ContentPage
     {
-        PhotosViewModel viewModel;
-        private PhotosViewModel photosViewModel;
+        AlbumsViewModel viewModel;
+        //private AlbumsViewModel albumsViewModel;
 
-        public PhotosPage()
-            :this(new PhotosViewModel())
+        public AlbumsPage()
+            :this(new AlbumsViewModel())
         {
         }
 
-        public PhotosPage(PhotosViewModel photosViewModel):base()
+        public AlbumsPage(AlbumsViewModel albumsViewModel)
         {
             //InitializeComponent();
 
-            //
+            // 
 
-            var photosDataTemplate = new DataTemplate(() =>
+            this.Title = "Albums";
+
+            var albumsDataTemplate = new DataTemplate(() =>
             {
-                var lblPhotos = new Label()
+                var label = new Label()
                 {
-                    //Text="Text",
                     LineBreakMode = LineBreakMode.NoWrap,
                     FontSize = 16
                 };
-                lblPhotos.SetBinding(Label.TextProperty, "Title");
-
-              
-
-                var cachedImage =
-                        new CachedImage()
-                        {
-                            HorizontalOptions = LayoutOptions.Center,
-                            VerticalOptions = LayoutOptions.Center,
-                            WidthRequest = 100,
-                            HeightRequest = 100,
-                            DownsampleToViewSize = true,
-                        };
-                cachedImage.SetBinding(CachedImage.SourceProperty, "ThumbnailUrl");
-
+                label.SetBinding(Label.TextProperty, "Title");
+                
                 var stackLayout = new StackLayout()
                 {
                     Children =
                     {
-                        cachedImage,
-                        lblPhotos,
-
+                        label,
                     }
                 };
-
+                
                 var tapGestureRecognizer = new TapGestureRecognizer()
                 {
                     NumberOfTapsRequired = 1,
@@ -71,15 +56,14 @@ namespace JSONPlaceholderApp.Views
                 tapGestureRecognizer.Tapped += OnItemSelected;
                 //tapGestureRecognizer.SetBinding(TapGestureRecognizer.CommandProperty, "OnItemSelected");
                 stackLayout.GestureRecognizers.Add(tapGestureRecognizer);
-                return stackLayout;
+                return stackLayout ;
             });
-
+            
             var collectionView = new CollectionView()
             {
-                ItemTemplate = photosDataTemplate
+                ItemTemplate = albumsDataTemplate
             };
             collectionView.SetBinding(CollectionView.ItemsSourceProperty, "Items");
-
 
             var refreshView = new RefreshView()
             {
@@ -92,22 +76,24 @@ namespace JSONPlaceholderApp.Views
             refreshView.SetBinding(RefreshView.CommandProperty, "LoadItemsCommand");
             this.Content = refreshView;
 
-            //
-            BindingContext = viewModel = photosViewModel;
+
+            // 
+
+            BindingContext = this.viewModel = albumsViewModel;
         }
 
         async void OnItemSelected(object sender, EventArgs args)
         {
             var layout = (BindableObject)sender;
-            var Photo = (Photo)layout.BindingContext;
-            await Navigation.PushAsync(new PhotoPage(new PhotoViewModel(Photo)));
+            var Album = (Album)layout.BindingContext;
+            await Navigation.PushAsync(new AlbumPage(new AlbumViewModel(Album)));
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
+            if (viewModel.Items?.Count == 0)
                 viewModel.IsBusy = true;
         }
     }

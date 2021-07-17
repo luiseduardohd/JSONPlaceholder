@@ -14,53 +14,61 @@ using JSONPlaceholderApp.ViewModels;
 namespace JSONPlaceholderApp.Views
 {
     [DesignTimeVisible(false)]
-    public partial class AlbumsPage : ContentPage
+    public partial class PostsPage : ContentPage
     {
-        AlbumsViewModel viewModel;
-        //private AlbumsViewModel albumsViewModel;
+        PostsViewModel viewModel;
+        //private PostsViewModel postsViewModel;
 
-        public AlbumsPage()
-            :this(new AlbumsViewModel())
+        public PostsPage():this(new PostsViewModel())
         {
         }
 
-        public AlbumsPage(AlbumsViewModel albumsViewModel)
+        public PostsPage(PostsViewModel postsViewModel)
         {
             //InitializeComponent();
 
-            // Empieza Editar
+            // 
 
-            var albumsDataTemplate = new DataTemplate(() =>
+            this.Title = "Posts";
+
+            var postsDataTemplate = new DataTemplate(() =>
             {
-                var label = new Label()
+                var lblTitle = new Label()
                 {
-                    //Text="Text",
                     LineBreakMode = LineBreakMode.NoWrap,
                     FontSize = 16
                 };
-                label.SetBinding(Label.TextProperty, "Title");
-                
+                lblTitle.SetBinding(Label.TextProperty, "Title");
+
+                var lblBody = new Label()
+                {
+                    LineBreakMode = LineBreakMode.NoWrap,
+                    FontSize = 16
+                };
+                lblBody.SetBinding(Label.TextProperty, "Body");
+
                 var stackLayout = new StackLayout()
                 {
                     Children =
                     {
-                        label,
+                        lblTitle,
+                        lblBody,
+
                     }
                 };
-                
+
                 var tapGestureRecognizer = new TapGestureRecognizer()
                 {
                     NumberOfTapsRequired = 1,
                 };
                 tapGestureRecognizer.Tapped += OnItemSelected;
-                //tapGestureRecognizer.SetBinding(TapGestureRecognizer.CommandProperty, "OnItemSelected");
                 stackLayout.GestureRecognizers.Add(tapGestureRecognizer);
-                return stackLayout ;
+                return stackLayout;
             });
-            
+
             var collectionView = new CollectionView()
             {
-                ItemTemplate = albumsDataTemplate
+                ItemTemplate = postsDataTemplate
             };
             collectionView.SetBinding(CollectionView.ItemsSourceProperty, "Items");
 
@@ -75,17 +83,16 @@ namespace JSONPlaceholderApp.Views
             refreshView.SetBinding(RefreshView.CommandProperty, "LoadItemsCommand");
             this.Content = refreshView;
 
+            // 
 
-            // Termina de editar
-
-            BindingContext = this.viewModel = albumsViewModel;
+            BindingContext = this.viewModel = postsViewModel;
         }
 
         async void OnItemSelected(object sender, EventArgs args)
         {
             var layout = (BindableObject)sender;
-            var Album = (Album)layout.BindingContext;
-            await Navigation.PushAsync(new AlbumPage(new AlbumViewModel(Album)));
+            var Post = (Post)layout.BindingContext;
+            await Navigation.PushAsync(new PostPage(new PostViewModel(Post)));
         }
 
         protected override void OnAppearing()

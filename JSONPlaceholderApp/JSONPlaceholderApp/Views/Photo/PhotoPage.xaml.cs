@@ -18,7 +18,9 @@ namespace JSONPlaceholderApp.Views
         {
             //InitializeComponent();
 
-            // Comienza a editar
+            // 
+
+            this.Title = "Photo";
 
             var lblTitlePhoto =
                 new Label()
@@ -55,25 +57,25 @@ namespace JSONPlaceholderApp.Views
 
 
 
-            // Termino de editar
+            // 
 
             BindingContext = this.viewModel = viewModel;
         }
 
-        public PhotoPage()
-        {
-            InitializeComponent();
+        //public PhotoPage()
+        //{
+        //    InitializeComponent();
 
-            var item = new Photo
-            {
-                //Text = "Item 1",
-                Title = "Item 1",
-                //Description = "This is an item description."
-            };
+        //    var item = new Photo
+        //    {
+        //        //Text = "Item 1",
+        //        Title = "Item 1",
+        //        //Description = "This is an item description."
+        //    };
 
-            viewModel = new PhotoViewModel(item);
+        //    viewModel = new PhotoViewModel(item);
            
-            BindingContext = viewModel;
-        }
+        //    BindingContext = viewModel;
+        //}
     }
 }

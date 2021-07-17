@@ -6,60 +6,61 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
 using JSONPlaceholderApp.Entities;
 using JSONPlaceholderApp.Views;
 using JSONPlaceholderApp.ViewModels;
+using FFImageLoading.Forms;
 
 namespace JSONPlaceholderApp.Views
 {
     [DesignTimeVisible(false)]
-    public partial class CommentsPage : ContentPage
+    public partial class PhotosPage : ContentPage
     {
-        CommentsViewModel viewModel;
-        //private CommentsViewModel commentsViewModel;
+        PhotosViewModel viewModel;
+        private PhotosViewModel photosViewModel;
 
-        public CommentsPage()
-            :this(new CommentsViewModel())
+        public PhotosPage()
+            :this(new PhotosViewModel())
         {
         }
 
-        public CommentsPage(CommentsViewModel commentsViewModel)
+        public PhotosPage(PhotosViewModel photosViewModel):base()
         {
             //InitializeComponent();
 
-            // Empiezo a editar
+            //
 
-            var commentsDataTemplate = new DataTemplate(() =>
+            this.Title = "Photos";
+
+            var photosDataTemplate = new DataTemplate(() =>
             {
-                var lblName = new Label()
+                var lblPhotos = new Label()
                 {
                     LineBreakMode = LineBreakMode.NoWrap,
                     FontSize = 16
                 };
-                lblName.SetBinding(Label.TextProperty, "Name");
+                lblPhotos.SetBinding(Label.TextProperty, "Title");
 
+              
 
-                var lblEmail = new Label()
-                {
-                    LineBreakMode = LineBreakMode.NoWrap,
-                    FontSize = 16
-                };
-                lblEmail.SetBinding(Label.TextProperty, "Email");
-
-                var lblBody = new Label()
-                {
-                    LineBreakMode = LineBreakMode.NoWrap,
-                    FontSize = 16
-                };
-                lblBody.SetBinding(Label.TextProperty, "Body");
+                var cachedImage =
+                        new CachedImage()
+                        {
+                            HorizontalOptions = LayoutOptions.Center,
+                            VerticalOptions = LayoutOptions.Center,
+                            WidthRequest = 100,
+                            HeightRequest = 100,
+                            DownsampleToViewSize = true,
+                        };
+                cachedImage.SetBinding(CachedImage.SourceProperty, "ThumbnailUrl");
 
                 var stackLayout = new StackLayout()
                 {
                     Children =
                     {
-                        lblName,
-                        lblEmail,
-                        lblBody,
+                        cachedImage,
+                        lblPhotos,
 
                     }
                 };
@@ -69,15 +70,17 @@ namespace JSONPlaceholderApp.Views
                     NumberOfTapsRequired = 1,
                 };
                 tapGestureRecognizer.Tapped += OnItemSelected;
+                //tapGestureRecognizer.SetBinding(TapGestureRecognizer.CommandProperty, "OnItemSelected");
                 stackLayout.GestureRecognizers.Add(tapGestureRecognizer);
                 return stackLayout;
             });
 
             var collectionView = new CollectionView()
             {
-                ItemTemplate = commentsDataTemplate
+                ItemTemplate = photosDataTemplate
             };
             collectionView.SetBinding(CollectionView.ItemsSourceProperty, "Items");
+
 
             var refreshView = new RefreshView()
             {
@@ -90,16 +93,16 @@ namespace JSONPlaceholderApp.Views
             refreshView.SetBinding(RefreshView.CommandProperty, "LoadItemsCommand");
             this.Content = refreshView;
 
-            // Termino de editar 
+            //
 
-            BindingContext = this.viewModel = commentsViewModel;
+            BindingContext = viewModel = photosViewModel;
         }
 
         async void OnItemSelected(object sender, EventArgs args)
         {
             var layout = (BindableObject)sender;
-            var Comment = (Comment)layout.BindingContext;
-            await Navigation.PushAsync(new CommentPage(new CommentViewModel(Comment)));
+            var Photo = (Photo)layout.BindingContext;
+            await Navigation.PushAsync(new PhotoPage(new PhotoViewModel(Photo)));
         }
 
         protected override void OnAppearing()

@@ -10,54 +10,49 @@ using Xamarin.Forms.Xaml;
 using JSONPlaceholderApp.Entities;
 using JSONPlaceholderApp.Views;
 using JSONPlaceholderApp.ViewModels;
-using System.Windows.Input;
 
 namespace JSONPlaceholderApp.Views
 {
     [DesignTimeVisible(false)]
-    public partial class UsersPage : ContentPage
+    public partial class TodosPage : ContentPage
     {
-        UsersViewModel viewModel;
+        TodosViewModel viewModel;
+        //private TodosViewModel todosViewModel;
 
-        public UsersPage()
+        public TodosPage():this(new TodosViewModel())
+        {
+        }
+
+        public TodosPage(TodosViewModel todosViewModel)
         {
             //InitializeComponent();
 
-            // Empiezo a editar
+            //
+            this.Title = "ToDos";
 
-            this.Title = "Users";
-
-            var usersDataTemplate = new DataTemplate(() =>
+            var todosDataTemplate = new DataTemplate(() =>
             {
-                var labelName = new Label()
+                var lblTitle = new Label()
                 {
                     LineBreakMode = LineBreakMode.NoWrap,
                     FontSize = 16
                 };
-                labelName.SetBinding(Label.TextProperty, "Name");
+                lblTitle.SetBinding(Label.TextProperty, "Title");
 
-                var labelUserName = new Label()
+                var lblCompleted = new Label()
                 {
                     LineBreakMode = LineBreakMode.NoWrap,
                     FontSize = 16
                 };
-                labelUserName.SetBinding(Label.TextProperty, "Username");
-
-                var labelEmail = new Label()
-                {
-                    LineBreakMode = LineBreakMode.NoWrap,
-                    FontSize = 16
-                };
-                labelEmail.SetBinding(Label.TextProperty, "Email");
+                lblCompleted.SetBinding(Label.TextProperty, "Completed");
 
                 var stackLayout = new StackLayout()
                 {
                     Children =
                     {
-                        labelName,
-                        labelUserName,
-                        labelEmail,
- 
+                        lblTitle,
+                        lblCompleted,
+
                     }
                 };
 
@@ -72,7 +67,7 @@ namespace JSONPlaceholderApp.Views
 
             var collectionView = new CollectionView()
             {
-                ItemTemplate = usersDataTemplate
+                ItemTemplate = todosDataTemplate
             };
             collectionView.SetBinding(CollectionView.ItemsSourceProperty, "Items");
 
@@ -87,23 +82,23 @@ namespace JSONPlaceholderApp.Views
             refreshView.SetBinding(RefreshView.CommandProperty, "LoadItemsCommand");
             this.Content = refreshView;
 
-            // Termino de editar 
+            // 
 
-            BindingContext = viewModel = new UsersViewModel();
+            BindingContext = this.viewModel = todosViewModel;
         }
 
         async void OnItemSelected(object sender, EventArgs args)
         {
             var layout = (BindableObject)sender;
-            var User = (User)layout.BindingContext;
-            await Navigation.PushAsync(new UserPage(new UserViewModel(User)));
+            var Todo = (Todo)layout.BindingContext;
+            await Navigation.PushAsync(new TodoPage(new TodoViewModel(Todo)));
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
+            if (viewModel.Items?.Count == 0)
                 viewModel.IsBusy = true;
         }
     }

@@ -19,7 +19,10 @@ namespace JSONPlaceholderApp.Views
         {
             //InitializeComponent();
 
-            // Comienza editar
+            // 
+
+            this.Title = "Album";
+
             var btnPhotos = new Button()
             {
                 Text = "Button",
@@ -56,7 +59,7 @@ namespace JSONPlaceholderApp.Views
 
              };
 
-                // Termina de editar
+            // 
 
                 BindingContext = this.viewModel = viewModel;
             }

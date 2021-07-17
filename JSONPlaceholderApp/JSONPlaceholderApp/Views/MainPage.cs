@@ -12,12 +12,13 @@ namespace JSONPlaceholderApp.Views
         {
             //InitializeComponent();
 
+            this.Title = "JSONPlaceholderApp";
             //NavigationPage commentsNavigationPage = new NavigationPage(new CommentsPage());
             //commentsNavigationPage.Title = "Comments";
             //Children.Add(commentsNavigationPage);
+            Children.Add(new PostsPage());
             Children.Add(new UsersPage());
             Children.Add(new CommentsPage());
-            Children.Add(new PostsPage());
             Children.Add(new PhotosPage());
             Children.Add(new AlbumsPage());
 
