@@ -19,8 +19,8 @@ namespace JSONPlaceholderApp.Model
 {
     public class JSONPlaceholder
     {
-        private JSONPlaceholderSqlite JSONPlaceholderSqlite;
-        private IJSONPlaceholder JSONPlaceholderWebService;
+        public JSONPlaceholderSqlite JSONPlaceholderSqlite;
+        public IJSONPlaceholder JSONPlaceholderWebService;
 
         public JSONPlaceholder(JSONPlaceholderSqlite JSONPlaceholderSqlite, IJSONPlaceholder JSONPlaceholderWebService)
         {
@@ -151,7 +151,7 @@ namespace JSONPlaceholderApp.Model
 
         public async Task<ObservableCollection<User>> GetUsersAsync()
         {
-
+            /*
             var rangeObservableCollection = await Cacheable<User>.GetItemAsync(
                 async () => await JSONPlaceholderSqlite.GetUsersAsync(),
                 async () =>
@@ -171,8 +171,10 @@ namespace JSONPlaceholderApp.Model
                 }
                 ,
                 JSONPlaceholderSqlite.SQLiteAsyncConnection);
+            */
 
-            return rangeObservableCollection;
+
+            return new ObservableCollection<User>(await JSONPlaceholderSqlite.GetUsersAsync());
         }
 
     }

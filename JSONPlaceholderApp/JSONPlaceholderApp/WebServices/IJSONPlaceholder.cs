@@ -34,6 +34,9 @@ namespace JSONPlaceholderApp.WebServices
         [Get("/albums/{albumId}")]
         Task<Album> GetAlbumAsync(int albumId);
 
+        [Put("/albums/{albumId}")]
+        Task UpdateAlbumAsync(int albumId,[Body] Album album);
+
         [Get("/albums/{album.Id}/photos/")]
         Task<List<Photo>> GetPhotosAsync(Album album);
 

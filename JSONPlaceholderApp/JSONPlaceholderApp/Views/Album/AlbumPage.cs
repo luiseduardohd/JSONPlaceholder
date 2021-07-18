@@ -23,9 +23,19 @@ namespace JSONPlaceholderApp.Views
 
             this.Title = "Album";
 
+            BindingContext = this.viewModel = viewModel;
+
+            var btnEdit = new Button()
+            {
+                Text = "Edit",
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                HorizontalOptions = LayoutOptions.Center
+            };
+            btnEdit.Clicked += OnEditButtonClicked;
+
             var btnPhotos = new Button()
             {
-                Text = "Button",
+                Text = "Photos",
                 VerticalOptions = LayoutOptions.CenterAndExpand,
                 HorizontalOptions = LayoutOptions.Center
             };
@@ -53,6 +63,7 @@ namespace JSONPlaceholderApp.Views
                             FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                         },
                         lblTitle,
+                        btnEdit,
                         btnPhotos,
                     }
                 }
@@ -61,8 +72,14 @@ namespace JSONPlaceholderApp.Views
 
             // 
 
-                BindingContext = this.viewModel = viewModel;
-            }
+        }
+
+        async void OnEditButtonClicked(object sender, EventArgs args)
+        {
+            AlbumViewModel viewModel = this.viewModel;
+            var page = new AlbumEditPage(viewModel);
+            await Navigation.PushAsync(page);
+        }
 
         async void OnPhotosButtonClicked(object sender, EventArgs args)
         {
