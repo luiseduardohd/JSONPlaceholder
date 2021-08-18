@@ -34,7 +34,7 @@ namespace JSONPlaceholder.ViewModels
             
         }
 
-
+        //https://github.com/brminnick/HackerNews/blob/main/HackerNews/HackerNews/ViewModels/NewsViewModel.cs
         protected void ObservableCollectionCallback(IEnumerable collection, object context, Action accessMethod, bool writeAccess)
         {
             //lock (collection)
