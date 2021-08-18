@@ -34,13 +34,16 @@ namespace JSONPlaceholder.ViewModels
             
         }
 
+
         protected void ObservableCollectionCallback(IEnumerable collection, object context, Action accessMethod, bool writeAccess)
         {
-            lock (collection)
-            {
-                accessMethod?.Invoke();
-            }
+            //lock (collection)
+            //{
+            //    accessMethod?.Invoke();
+            //}
+            Device.BeginInvokeOnMainThread(accessMethod);//TODO:Check which version is better.
         }
+
         async Task ExecuteAddItemCommand(T item)
         {
             var newItem = item ;
