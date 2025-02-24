@@ -10,28 +10,28 @@ JSONPlaceholder Xamarin.Forms is a cross-platform mobile application built using
 
 ## Screenshots
 ### Posts
-![Posts](Screenshots/Posts-All.png| width=100)
-![Posts 2](Screenshots/Posts-All-2.png| width=100)
-![Post Details](Screenshots/Posts-Post.png| width=100)
-![Post Comments](Screenshots/Post-Comments.png| width=100)
+![Posts](Screenshots/Posts-All.png | width=100)
+![Posts 2](Screenshots/Posts-All-2.png | width=100)
+![Post Details](Screenshots/Posts-Post.png | width=100)
+![Post Comments](Screenshots/Post-Comments.png | width=100)
 
 ### Comments
-![All Comments](Screenshots/Comments-All.png| width=100)
-![All Comments 2](Screenshots/Comments-All-2.png| width=100)
-![Comment Details](Screenshots/Comments-Comment.png| width=100)
+![All Comments](Screenshots/Comments-All.png | width=100)
+![All Comments 2](Screenshots/Comments-All-2.png | width=100)
+![Comment Details](Screenshots/Comments-Comment.png | width=100)
 
 ### Albums & Photos
-![Albums](Screenshots/Albums.png| width=100)
-![Album Details](Screenshots/Albums-Album.png| width=100)
-![Album Photos](Screenshots/Album-Photos.png| width=100)
-![Photos](Screenshots/Photos.png| width=100)
-![Photos 2](Screenshots/Photos-All-2.png| width=100)
-![Photo Details](Screenshots/Photos-Photo.png| width=100)
-![All Photos](Screenshots/Photos-All.png| width=100)
+![Albums](Screenshots/Albums.png | width=100)
+![Album Details](Screenshots/Albums-Album.png | width=100)
+![Album Photos](Screenshots/Album-Photos.png | width=100)
+![Photos](Screenshots/Photos.png | width=100)
+![Photos 2](Screenshots/Photos-All-2.png | width=100)
+![Photo Details](Screenshots/Photos-Photo.png | width=100)
+![All Photos](Screenshots/Photos-All.png | width=100)
 
 ### Users
-![Users](Screenshots/Users.png| width=100)
-![User Details](Screenshots/Users-User.png| width=100)
+![Users](Screenshots/Users.png | width=100)
+![User Details](Screenshots/Users-User.png | width=100)
 
 ## Installation
 1. Clone this repository:
