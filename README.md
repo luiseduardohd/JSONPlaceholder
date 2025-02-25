@@ -11,7 +11,7 @@ JSONPlaceholder Xamarin.Forms is a cross-platform mobile application built using
 ## Screenshots
 ### Posts
 ![Posts](Screenshots/Posts-All.png)
-<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Posts-All.png?raw=true" width="100">
+<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Posts-All.png?raw=true" width="30%">
 ![Posts 2](Screenshots/Posts-All-2.png)
 ![Post Details](Screenshots/Posts-Post.png)
 ![Post Comments](Screenshots/Post-Comments.png)
