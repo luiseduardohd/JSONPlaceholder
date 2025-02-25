@@ -10,11 +10,12 @@ JSONPlaceholder Xamarin.Forms is a cross-platform mobile application built using
 
 ## Screenshots
 ### Posts
-![Posts](Screenshots/Posts-All.png)
 <img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Posts-All.png?raw=true" width="30%">
-![Posts 2](Screenshots/Posts-All-2.png)
-![Post Details](Screenshots/Posts-Post.png)
-![Post Comments](Screenshots/Post-Comments.png)
+<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Posts-All-2.png?raw=true" width="30%">
+### Post Details
+<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Posts-Post.png?raw=true" width="30%">
+### Post Comments
+<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Post-Comments.png?raw=true" width="30%">
 
 ### Comments
 ![All Comments](Screenshots/Comments-All.png)
