@@ -10,30 +10,58 @@ JSONPlaceholder Xamarin.Forms is a cross-platform mobile application built using
 
 ## Screenshots
 ### Posts
+
+#### Posts All
 <img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Posts-All.png?raw=true" width="30%">
 <img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Posts-All-2.png?raw=true" width="30%">
-### Post Details
+
+#### Post Details
+
 <img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Posts-Post.png?raw=true" width="30%">
-### Post Comments
+
+#### Post Comments
+
 <img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Post-Comments.png?raw=true" width="30%">
 
 ### Comments
-![All Comments](Screenshots/Comments-All.png)
-![All Comments 2](Screenshots/Comments-All-2.png)
-![Comment Details](Screenshots/Comments-Comment.png)
 
-### Albums & Photos
-![Albums](Screenshots/Albums.png)
-![Album Details](Screenshots/Albums-Album.png)
-![Album Photos](Screenshots/Album-Photos.png)
+#### Comments All
+
+<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Comments-All.png?raw=true" width="30%">
+<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Comments-All-2.png?raw=true" width="30%">
+
+#### Comment Detail
+<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Comments-Comment.png?raw=true" width="30%">
+
+### Albums
+
+#### Albums All
+<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Albums.png?raw=true" width="30%">
+
+#### Album Detail
+<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Albums-Album.png?raw=true" width="30%">
+
+#### Albums Photos
+<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Album-Photos.png?raw=true" width="30%">
+
+### Photos
+
+#### Photos All
 ![Photos](Screenshots/Photos.png)
-![Photos 2](Screenshots/Photos-All-2.png)
-![Photo Details](Screenshots/Photos-Photo.png)
-![All Photos](Screenshots/Photos-All.png)
+<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Photos.png?raw=true" width="30%">
+<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Photos-All.png?raw=true" width="30%">
+<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Photos-All-2.png?raw=true" width="30%">
+
+#### Photo Detail
+<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Photos-Photo.png?raw=true" width="30%">
 
 ### Users
-![Users](Screenshots/Users.png)
-![User Details](Screenshots/Users-User.png)
+
+#### Users All
+<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Users.png?raw=true" width="30%">
+
+#### User Detail
+<img src="https://github.com/luiseduardohd/JSONPlaceholder/blob/master/Screenshots/Users-User.png?raw=true" width="30%">
 
 ## Installation
 1. Clone this repository:
